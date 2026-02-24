@@ -7,217 +7,255 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f9ff;
-    color: #333;
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#f4f9ff;
+    scroll-behavior:smooth;
 }
 
-/* HEADER CON IMAGEN + EFECTO AZUL */
-header {
-    position: relative;
-    background: url('consultorio.jpeg') center/cover no-repeat;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+/* NAVBAR */
+nav{
+    position:fixed;
+    width:100%;
+    padding:15px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter: blur(6px);
+    z-index:1000;
 }
 
-header::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(13, 71, 161, 0.75);
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:500;
+    transition:0.3s;
 }
 
-.header-content {
-    position: relative;
-    z-index: 2;
+nav a:hover{
+    color:#90caf9;
 }
 
-header img {
-    width: 130px;
-    margin-bottom: 20px;
+.nav-btn{
+    background:#1976d2;
+    padding:10px 18px;
+    border-radius:25px;
 }
 
-header h1 {
-    font-size: 36px;
-    margin: 0;
+/* HERO */
+.hero{
+    height:100vh;
+    background:url('consultorio.jpeg') center/cover no-repeat;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:0 8%;
+    color:white;
 }
 
-header p {
-    font-size: 20px;
-    margin: 15px 0 25px;
+.hero::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to right, rgba(0,0,0,0.75), rgba(13,71,161,0.7));
 }
 
-.btn {
-    display: inline-block;
-    padding: 14px 24px;
-    margin: 8px;
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-    transition: 0.3s;
+.hero-content{
+    position:relative;
+    max-width:650px;
+    animation:fadeIn 1.5s ease;
 }
 
-.btn-whatsapp {
-    background-color: #25D366;
+.hero h1{
+    font-size:48px;
+    margin-bottom:20px;
 }
 
-.btn-call {
-    background-color: #0d47a1;
-    border: 2px solid white;
+.hero h2{
+    font-weight:400;
+    margin-bottom:25px;
 }
 
-.btn:hover {
-    transform: scale(1.05);
+.btn{
+    display:inline-block;
+    padding:14px 25px;
+    border-radius:30px;
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    margin-right:15px;
+    transition:0.3s;
 }
 
-/* SECCIONES */
-section {
-    padding: 80px 20px;
-    max-width: 1100px;
-    margin: auto;
+.btn-primary{ background:#1976d2; }
+.btn-whatsapp{ background:#25D366; }
+
+.btn:hover{
+    transform:scale(1.08);
 }
 
-h2 {
-    color: #0d47a1;
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 28px;
+/* CARDS */
+.features{
+    margin-top:-100px;
+    padding:0 8%;
+    display:flex;
+    gap:25px;
 }
 
-.services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+.card{
+    flex:1;
+    background:rgba(255,255,255,0.97);
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    text-align:center;
+    transition:0.4s;
 }
 
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
+.card:hover{
+    transform:translateY(-10px);
 }
 
-.card:hover {
-    transform: translateY(-5px);
+.card h3{ color:#0d47a1; }
+
+/* SECTIONS */
+section{
+    padding:100px 8%;
 }
 
-.card h3 {
-    color: #1976d2;
+section h2{
+    text-align:center;
+    color:#0d47a1;
+    margin-bottom:50px;
 }
 
-.image-center {
-    text-align: center;
-    margin-top: 40px;
+/* TESTIMONIOS */
+.testimonials{
+    display:flex;
+    gap:30px;
 }
 
-.image-center img {
-    width: 100%;
-    max-width: 450px;
-    border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+.testimonial{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    flex:1;
 }
 
-.contact {
-    text-align: center;
+/* CERTIFICACIONES */
+.certifications{
+    text-align:center;
 }
 
-footer {
-    background: #0d47a1;
-    color: white;
-    text-align: center;
-    padding: 25px;
+/* WHATSAPP */
+.whatsapp{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#25D366;
+    color:white;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    text-decoration:none;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3);
 }
 
-/* BOTÓN FLOTANTE WHATSAPP */
-.whatsapp-float {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: #25D366;
-    color: white;
-    font-size: 28px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+/* ANIMACIÓN */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="header-content">
-        <img src="logo.jpeg" alt="Logo">
+<nav>
+    <div style="color:white;font-weight:600;">Dr. Sergio Del Moral</div>
+    <div>
+        <a href="#">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#patologias">Patologías</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#contacto">Contacto</a>
+        <a href="https://wa.me/525534108562" class="nav-btn">Agendar Cita</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-content">
         <h1>Dr. Sergio Del Moral Carachure</h1>
-        <p>Especialista en Traumatología y Ortopedia</p>
-        <a href="https://wa.me/525534108562" class="btn btn-whatsapp">Agendar por WhatsApp</a>
-        <a href="tel:+525535108562" class="btn btn-call">Llamar ahora</a>
+        <h2>Especialista en Lesiones de Rodilla, Hombro y Lesiones Deportivas</h2>
+        <a href="https://wa.me/525534108562" class="btn btn-primary">Agendar Cita</a>
+        <a href="tel:+525535108562" class="btn btn-whatsapp">Llamar Ahora</a>
     </div>
-</header>
+</div>
 
-<section>
-    <h2>Sobre el Doctor</h2>
-    <p style="text-align:center; max-width:800px; margin:auto;">
-        Atención especializada en lesiones musculoesqueléticas, cirugía artroscópica,
-        tratamiento de fracturas y lesiones deportivas en Ciudad de México.
-    </p>
-    <div class="image-center">
-        <img src="doctor.png" alt="Doctor">
+<div class="features">
+    <div class="card">
+        <h3>Experiencia Comprobada</h3>
+        <p>Atención especializada en traumatología y ortopedia.</p>
     </div>
-</section>
+    <div class="card">
+        <h3>Atención Personalizada</h3>
+        <p>Cada paciente recibe un plan único de tratamiento.</p>
+    </div>
+    <div class="card">
+        <h3>Tecnología Moderna</h3>
+        <p>Equipamiento médico de última generación.</p>
+    </div>
+</div>
 
-<section>
+<section id="servicios">
     <h2>Servicios</h2>
-    <div class="services">
-        <div class="card">
-            <h3>Lesiones de Rodilla</h3>
-            <p>Diagnóstico y tratamiento quirúrgico y conservador.</p>
-        </div>
-        <div class="card">
-            <h3>Lesiones de Hombro</h3>
-            <p>Manguito rotador, luxaciones y artroscopia.</p>
-        </div>
-        <div class="card">
-            <h3>Hallux Valgus</h3>
-            <p>Corrección quirúrgica de juanetes.</p>
-        </div>
-        <div class="card">
-            <h3>Fracturas</h3>
-            <p>Manejo integral de fracturas simples y complejas.</p>
-        </div>
-    </div>
+    <p style="text-align:center;">Lesiones de rodilla, hombro, fracturas, hallux valgus y cirugía artroscópica.</p>
+</section>
 
-    <div class="image-center">
-        <img src="antesdespues.jpeg" alt="Antes y Después">
+<section id="patologias">
+    <h2>Patologías Frecuentes</h2>
+    <p style="text-align:center;">
+    Lesiones deportivas, meniscos, ligamento cruzado anterior, luxaciones de hombro, fracturas complejas.
+    </p>
+</section>
+
+<section id="testimonios">
+    <h2>Testimonios</h2>
+    <div class="testimonials">
+        <div class="testimonial">
+            ⭐⭐⭐⭐⭐
+            <p>Excelente atención y profesionalismo. Recuperación rápida después de mi cirugía.</p>
+        </div>
+        <div class="testimonial">
+            ⭐⭐⭐⭐⭐
+            <p>Diagnóstico preciso y trato humano excepcional.</p>
+        </div>
     </div>
 </section>
 
-<section class="contact">
+<section class="certifications">
+    <h2>Certificaciones</h2>
+    <p>Especialista certificado en Traumatología y Ortopedia.</p>
+</section>
+
+<section id="contacto">
     <h2>Contacto</h2>
-    <p><strong>Teléfono:</strong> 55 3510 8562</p>
-    <p><strong>WhatsApp:</strong> 5534108562</p>
-    <p><strong>Email:</strong> dr.delmoral.carachure@gmail.com</p>
+    <p style="text-align:center;">
+    Tel: 55 3510 8562<br>
+    Email: dr.delmoral.carachure@gmail.com
+    </p>
 </section>
 
-<footer>
-    © 2026 Dr. Sergio Del Moral Carachure | Traumatología y Ortopedia
-</footer>
-
-<a href="https://wa.me/525534108562" class="whatsapp-float">🟢</a>
+<a href="https://wa.me/525534108562" class="whatsapp">🟢</a>
 
 </body>
 </html>
