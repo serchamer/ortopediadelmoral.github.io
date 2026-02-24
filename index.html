@@ -3,21 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Sergio Del Moral Carachure | Traumatología y Ortopedia</title>
+<title>Dr. Sergio Del Moral | Traumatología y Ortopedia</title>
 
-<meta name="description" content="Especialista en lesiones de rodilla, hombro y cirugía artroscópica. Agenda tu cita con el Dr. Sergio Del Moral.">
-<meta name="keywords" content="traumatólogo, ortopedista, rodilla, hombro, artroscopia, lesiones deportivas">
+<meta name="description" content="Especialista en lesiones de rodilla, hombro y cirugía artroscópica en Ciudad de México.">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
 background:#f4f9ff;
-overflow-x:hidden;
 scroll-behavior:smooth;
+}
+
+/* NAVBAR */
+nav{
+position:fixed;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+z-index:1000;
+}
+
+nav a{
+text-decoration:none;
+margin:0 15px;
+color:#333;
+font-weight:500;
+}
+
+.nav-btn{
+background:#1a237e;
+color:white;
+padding:10px 18px;
+border-radius:25px;
+}
+
+section{
+padding:100px 8%;
 }
 
 /* HERO */
@@ -42,11 +70,6 @@ background:linear-gradient(to right, rgba(0,0,0,0.75), rgba(13,71,161,0.7));
 .hero-content{
 position:relative;
 max-width:650px;
-animation:fadeIn 1.5s ease;
-}
-
-.hero h1{
-font-size:48px;
 }
 
 .btn{
@@ -58,56 +81,9 @@ color:white;
 font-weight:600;
 margin-right:15px;
 background:#1976d2;
-transition:0.3s;
 }
 
-.btn:hover{
-transform:scale(1.08);
-}
-
-/* TARJETAS */
-.features{
-margin-top:-40px;
-padding:0 8%;
-display:flex;
-gap:25px;
-flex-wrap:wrap;
-}
-
-.card{
-flex:1;
-min-width:250px;
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-text-align:center;
-transition:0.4s;
-opacity:0;
-transform:translateY(40px);
-}
-
-.card.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.card:hover{
-transform:translateY(-10px);
-}
-
-/* SECCIONES */
-section{
-padding:100px 8%;
-}
-
-section h2{
-text-align:center;
-color:#0d47a1;
-margin-bottom:50px;
-}
-
-/* SERVICIOS */
+/* SERVICIOS ESPECIALIZADOS */
 .servicios{
 display:flex;
 gap:30px;
@@ -121,18 +97,6 @@ background:white;
 border-radius:15px;
 overflow:hidden;
 box-shadow:0 6px 20px rgba(0,0,0,0.08);
-transition:0.4s;
-opacity:0;
-transform:translateY(40px);
-}
-
-.servicio.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.servicio:hover{
-transform:scale(1.05);
 }
 
 .servicio img{
@@ -145,25 +109,44 @@ object-fit:cover;
 padding:20px;
 }
 
-/* CERTIFICACIONES */
-.certificaciones{
-background:#e3f2fd;
-text-align:center;
+/* NUESTROS SERVICIOS CUADROS */
+.grid-servicios{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
 }
 
-/* REDES */
-.redes{
-margin-top:30px;
+.cuadro{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
 }
 
-.redes img{
-width:45px;
-margin:0 12px;
-transition:0.3s;
+/* UBICACION */
+.ubicacion{
+display:flex;
+gap:40px;
+flex-wrap:wrap;
 }
 
-.redes img:hover{
-transform:scale(1.2);
+.info{
+flex:1;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+.mapa{
+flex:1;
+}
+
+iframe{
+width:100%;
+height:400px;
+border-radius:15px;
+border:0;
 }
 
 /* WHATSAPP */
@@ -171,69 +154,48 @@ transform:scale(1.2);
 position:fixed;
 bottom:25px;
 right:25px;
-width:70px;
-height:70px;
-animation:pulse 2s infinite;
+width:65px;
+height:65px;
 }
 
 .whatsapp img{
 width:100%;
 }
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.15);}
-100%{transform:scale(1);}
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(30px);}
-to{opacity:1; transform:translateY(0);}
-}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-.hero h1{font-size:34px;}
-.features, .servicios{flex-direction:column;}
-}
-
 </style>
 </head>
 
 <body>
 
+<nav>
+<div><strong>Dr. Sergio Del Moral</strong></div>
+<div>
+<a href="#">Inicio</a>
+<a href="#especializados">Servicios</a>
+<a href="#nuestros">Patologías</a>
+<a href="#ubicacion">Ubicación</a>
+<a href="tel:+525534108562">Llamar</a>
+<a href="https://wa.me/525534108562" class="nav-btn">Agendar Cita</a>
+</div>
+</nav>
+
 <div class="hero">
 <div class="hero-content">
-<h1>Dr. Sergio Del Moral Carachure</h1>
-<h2>Especialista en Lesiones de Rodilla, Hombro y Cirugía Artroscópica</h2>
+<h1>Traumatología y Ortopedia</h1>
+<h2>Atención integral con los más altos estándares de calidad</h2>
 <a href="https://wa.me/525534108562" class="btn">Agendar Cita</a>
+<a href="tel:+525534108562" class="btn" style="background:#0d47a1;">Llamar</a>
 </div>
 </div>
 
-<div class="features">
-<div class="card">
-<h3>Experiencia</h3>
-<p>Especialista certificado en traumatología y ortopedia.</p>
-</div>
-<div class="card">
-<h3>Atención Personalizada</h3>
-<p>Diagnóstico preciso y tratamiento individualizado.</p>
-</div>
-<div class="card">
-<h3>Tecnología Avanzada</h3>
-<p>Cirugía artroscópica mínimamente invasiva.</p>
-</div>
-</div>
-
-<section>
-<h2>Servicios Especializados</h2>
+<section id="especializados">
+<h2 style="text-align:center;color:#0d47a1;">Servicios Especializados</h2>
 <div class="servicios">
 
 <div class="servicio">
 <img src="hombro.png">
 <div>
 <h3>Lesiones de Hombro</h3>
-<p>Luxaciones, manguito rotador y artroscopia.</p>
+<p>Manguito rotador, luxaciones y artroscopia.</p>
 </div>
 </div>
 
@@ -256,42 +218,76 @@ to{opacity:1; transform:translateY(0);}
 </div>
 </section>
 
-<section class="certificaciones">
-<h2>Certificaciones</h2>
-<p><strong>Médico Cirujano y Partero</strong> – IPN</p>
-<p><strong>Traumatólogo y Ortopedista</strong> – UNAM</p>
-<p><strong>Alta Especialidad en Cirugía Artroscópica</strong> – UNAM</p>
+<section id="nuestros">
+<h2 style="text-align:center;color:#0d47a1;">Nuestros Servicios</h2>
 
-<div class="redes">
-<a href="https://www.facebook.com/share/1F18XEBD1E/" target="_blank">
-<img src="facebooklogo.jpg">
-</a>
-<a href="https://www.instagram.com/sergiodelmoral1" target="_blank">
-<img src="instagramlogo.png">
-</a>
-<a href="https://www.tiktok.com/@sergiodelmoral178" target="_blank">
-<img src="tiktoklogo.png">
-</a>
+<div class="grid-servicios">
+<div class="cuadro">
+<h3>Consulta Especializada</h3>
+<p>Evaluación completa y diagnóstico preciso.</p>
+</div>
+
+<div class="cuadro">
+<h3>Tratamiento Conservador</h3>
+<p>Terapia física, infiltraciones y medicamentos.</p>
+</div>
+
+<div class="cuadro">
+<h3>Cirugía Ortopédica</h3>
+<p>Técnicas mínimamente invasivas.</p>
+</div>
+
+<div class="cuadro">
+<h3>Diagnóstico por Imagen</h3>
+<p>Interpretación de estudios radiológicos.</p>
+</div>
+
+<div class="cuadro">
+<h3>Seguimiento Postoperatorio</h3>
+<p>Control continuo después de cirugías.</p>
+</div>
+
+<div class="cuadro">
+<h3>Rehabilitación</h3>
+<p>Programas personalizados de recuperación.</p>
+</div>
 </div>
 </section>
 
-<a href="https://wa.me/525534108562" class="whatsapp" target="_blank">
+<section id="ubicacion">
+<h2 style="text-align:center;color:#0d47a1;">Nuestra Ubicación</h2>
+
+<div class="ubicacion">
+
+<div class="info">
+<h3>Información de contacto</h3>
+<p><strong>Dirección:</strong><br>
+Hospital MAC La Viga<br>
+Calzada La Viga #1174 El Triunfo<br>
+Ciudad de México, CDMX
+</p>
+
+<p><strong>Teléfono:</strong><br>
+55 3410 8562
+</p>
+
+<p><strong>Horario:</strong><br>
+Lunes a Viernes: 9:00 - 18:00<br>
+Sábado: 9:00 - 14:00<br>
+Domingo: Cerrado
+</p>
+</div>
+
+<div class="mapa">
+<iframe src="https://www.google.com/maps?q=Hospital+MAC+La+Viga+Ciudad+de+Mexico&output=embed"></iframe>
+</div>
+
+</div>
+</section>
+
+<a href="https://wa.me/525534108562" class="whatsapp">
 <img src="whatsapplogo.png">
 </a>
-
-<script>
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
-}
-});
-},{threshold:0.2});
-
-document.querySelectorAll('.card, .servicio').forEach(el=>{
-observer.observe(el);
-});
-</script>
 
 </body>
 </html>
