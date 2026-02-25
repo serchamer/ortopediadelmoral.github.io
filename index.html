@@ -253,15 +253,20 @@ height:300px;
 <body>
 
 <nav>
-<div><strong>Dr. Sergio Del Moral</strong></div>
-<div>
-<a href="#">Inicio</a>
-<a href="#especializados">Servicios</a>
-<a href="#nuestros">Patologías</a>
-<a href="#ubicacion">Ubicación</a>
-<a href="tel:+525534108562">Llamar</a>
-<a href="https://wa.me/525534108562" class="nav-btn">Agendar Cita</a>
-</div>
+  <div class="logo">
+    <strong>Dr. Sergio Del Moral</strong>
+  </div>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#">Inicio</a>
+    <a href="#especializados">Servicios</a>
+    <a href="#nuestros">Patologías</a>
+    <a href="#ubicacion">Ubicación</a>
+    <a href="tel:+525534108562">Llamar</a>
+    <a href="https://wa.me/525534108562" class="nav-btn">Agendar Cita</a>
+  </div>
 </nav>
 
 <div class="hero">
@@ -393,6 +398,12 @@ Domingo: Cerrado
 <a href="https://wa.me/525534108562" class="whatsapp">
 <img src="whatsapplogo.png">
 </a>
-
+ 
+<script>
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
+ 
 </body>
 </html>
