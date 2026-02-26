@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Traumatólogo en Ciudad de México | Dr. Sergio Del Moral | Rodilla y Hombro</title>
 
-<meta name="description" content="Especialista en lesiones de rodilla, hombro y cirugía artroscópica en Ciudad de México.">
+<meta name="description" content="Traumatólogo en Ciudad de México especialista en lesiones de rodilla, hombro y cirugía artroscópica. Agenda tu cita hoy.">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
@@ -44,8 +46,16 @@ padding:10px 18px;
 border-radius:25px;
 }
 
-section{
-padding:100px 8%;
+.nav-links{
+display:flex;
+align-items:center;
+}
+
+/* BOTON HAMBURGUESA */
+.menu-toggle{
+display:none;
+font-size:28px;
+cursor:pointer;
 }
 
 /* HERO */
@@ -83,7 +93,7 @@ margin-right:15px;
 background:#1976d2;
 }
 
-/* SERVICIOS ESPECIALIZADOS */
+/* SERVICIOS */
 .servicios{
 display:flex;
 gap:30px;
@@ -97,6 +107,12 @@ background:white;
 border-radius:15px;
 overflow:hidden;
 box-shadow:0 6px 20px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.servicio:hover{
+transform:translateY(-8px);
+box-shadow:0 12px 25px rgba(0,0,0,0.15);
 }
 
 .servicio img{
@@ -109,7 +125,7 @@ object-fit:cover;
 padding:20px;
 }
 
-/* NUESTROS SERVICIOS CUADROS */
+/* GRID SERVICIOS */
 .grid-servicios{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -121,6 +137,12 @@ background:white;
 padding:30px;
 border-radius:15px;
 box-shadow:0 6px 20px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.cuadro:hover{
+transform:translateY(-8px);
+box-shadow:0 12px 25px rgba(0,0,0,0.15);
 }
 
 /* UBICACION */
@@ -149,10 +171,11 @@ border-radius:15px;
 border:0;
 }
 
- /* CERTIFICACIONES */
+/* CERTIFICACIONES */
 .certificaciones{
 background:#e3f2fd;
 text-align:center;
+padding:60px 8%;
 }
 
 /* REDES */
@@ -168,7 +191,7 @@ transition:0.3s;
 
 .redes img:hover{
 transform:scale(1.2);
-} 
+}
 
 /* WHATSAPP */
 .whatsapp{
@@ -181,52 +204,56 @@ height:65px;
 
 .whatsapp img{
 width:100%;
+filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+animation: float 3s ease-in-out infinite;
 }
 
-/* ========================= */
-/*        MOBILE STYLE       */
-/* ========================= */
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
+}
+
+/* ================= MOBILE ================= */
 
 @media (max-width: 768px){
 
-  nav{
-    flex-direction:row;
-    justify-content:space-between;
-    align-items:center;
-  }
-
-  .menu-toggle{
-    display:block;
-    font-size:28px;
-    cursor:pointer;
-  }
+.menu-toggle{
+display:block;
+}
 
 .nav-links{
-    display:flex;
+display:none;
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:white;
+flex-direction:column;
+text-align:center;
+padding:20px 0;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 768px){
+.nav-links a{
+display:block;
+margin:15px 0;
+}
 
-  .nav-links{
-    display:none;
-    position:absolute;
-    top:70px;
-    left:0;
-    width:100%;
-    background:white;
-    flex-direction:column;
-    padding:15px 0;
-  }
+.nav-links.active{
+display:flex;
+}
 
-  .nav-links a{
-    margin:15px 0;
-  }
-
-  .nav-links.active{
-    display:flex;
-  }
+.hero{
+height:90vh;
+}
 
 }
+
+section{
+padding:100px 8%;
+}
+
 </style>
 </head>
 
@@ -251,8 +278,8 @@ width:100%;
 
 <div class="hero">
 <div class="hero-content">
-<h1>Traumatología y Ortopedia</h1>
-<h2>Atención integral con los más altos estándares de calidad</h2>
+<h1>Traumatólogo en Ciudad de México</h1>
+<h2>Especialista en rodilla, hombro y cirugía artroscópica</h2>
 <a href="https://wa.me/525534108562" class="btn">Agendar Cita</a>
 <a href="tel:+525534108562" class="btn" style="background:#0d47a1;">Llamar</a>
 </div>
@@ -291,68 +318,37 @@ width:100%;
 
 <section id="nuestros">
 <h2 style="text-align:center;color:#0d47a1;">Nuestros Servicios</h2>
-
 <div class="grid-servicios">
-<div class="cuadro">
-<h3>Consulta Especializada</h3>
-<p>Evaluación completa y diagnóstico preciso.</p>
-</div>
-
-<div class="cuadro">
-<h3>Tratamiento Conservador</h3>
-<p>Terapia física, infiltraciones y medicamentos.</p>
-</div>
-
-<div class="cuadro">
-<h3>Cirugía Ortopédica</h3>
-<p>Técnicas mínimamente invasivas.</p>
-</div>
-
-<div class="cuadro">
-<h3>Diagnóstico por Imagen</h3>
-<p>Interpretación de estudios radiológicos.</p>
-</div>
-
-<div class="cuadro">
-<h3>Seguimiento Postoperatorio</h3>
-<p>Control continuo después de cirugías.</p>
-</div>
-
-<div class="cuadro">
-<h3>Rehabilitación</h3>
-<p>Programas personalizados de recuperación.</p>
-</div>
+<div class="cuadro"><h3>Consulta Especializada</h3><p>Evaluación completa y diagnóstico preciso.</p></div>
+<div class="cuadro"><h3>Tratamiento Conservador</h3><p>Terapia física, infiltraciones y medicamentos.</p></div>
+<div class="cuadro"><h3>Cirugía Ortopédica</h3><p>Técnicas mínimamente invasivas.</p></div>
+<div class="cuadro"><h3>Diagnóstico por Imagen</h3><p>Interpretación de estudios radiológicos.</p></div>
+<div class="cuadro"><h3>Seguimiento Postoperatorio</h3><p>Control continuo después de cirugías.</p></div>
+<div class="cuadro"><h3>Rehabilitación</h3><p>Programas personalizados de recuperación.</p></div>
 </div>
 </section>
 
 <section id="ubicacion">
 <h2 style="text-align:center;color:#0d47a1;">Nuestra Ubicación</h2>
-
 <div class="ubicacion">
-
 <div class="info">
 <h3>Información de contacto</h3>
 <p><strong>Dirección:</strong><br>
 Hospital MAC La Viga<br>
 Calzada La Viga #1174 El Triunfo<br>
-Ciudad de México, CDMX
-</p>
+Ciudad de México, CDMX</p>
 
-<p><strong>Teléfono:</strong><br>
-55 3410 8562
-</p>
+<p><strong>Teléfono:</strong><br>55 3410 8562</p>
 
 <p><strong>Horario:</strong><br>
 Lunes a Viernes: 9:00 - 18:00<br>
 Sábado: 9:00 - 14:00<br>
-Domingo: Cerrado
-</p>
+Domingo: Cerrado</p>
 </div>
 
 <div class="mapa">
 <iframe src="https://www.google.com/maps?q=Hospital+MAC+La+Viga+Ciudad+de+Mexico&output=embed"></iframe>
 </div>
-
 </div>
 </section>
 
@@ -361,31 +357,41 @@ Domingo: Cerrado
 <p><strong>Médico Cirujano y Partero</strong> – IPN</p>
 <p><strong>Traumatólogo y Ortopedista</strong> – UNAM</p>
 <p><strong>Alta Especialidad en Cirugía Artroscópica</strong> – UNAM</p>
-<p>Cédula Profesional: 11011086</p>
+<p>Cédula Profesional: 12818525</p>
 <p>Certificado por el Consejo Mexicano de Ortopedia y Traumatología</p>
-
-<div class="redes">
-<a href="https://www.facebook.com/share/1F18XEBD1E/" target="_blank">
-<img src="facebooklogo.jpg">
-</a>
-<a href="https://www.instagram.com/sergiodelmoral1" target="_blank">
-<img src="instagramlogo.png">
-</a>
-<a href="https://www.tiktok.com/@sergiodelmoral178" target="_blank">
-<img src="tiktoklogo.jpg">
-
-</div>
 </section>
 
 <a href="https://wa.me/525534108562" class="whatsapp">
 <img src="whatsapplogo.png">
 </a>
- 
+
 <script>
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("active");
 }
+
+document.querySelectorAll(".nav-links a").forEach(link=>{
+  link.addEventListener("click", ()=>{
+    document.getElementById("navLinks").classList.remove("active");
+  });
+});
 </script>
- 
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Physician",
+ "name": "Dr. Sergio Del Moral Carachure",
+ "medicalSpecialty": "Orthopedic",
+ "address": {
+   "@type": "PostalAddress",
+   "addressLocality": "Ciudad de México",
+   "addressRegion": "CDMX",
+   "streetAddress": "Calzada La Viga #1174 El Triunfo"
+ },
+ "telephone": "+525534108562"
+}
+</script>
+
 </body>
 </html>
