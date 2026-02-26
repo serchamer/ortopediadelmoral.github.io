@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Sergio Del Moral Carachure | Traumatología y Ortopedia</title>
+<title>Traumatólogo en Ciudad de México | Dr. Sergio Del Moral | Rodilla y Hombro</title>
 
 <meta name="description" content="Especialista en lesiones de rodilla, hombro y cirugía artroscópica en Ciudad de México.">
 
@@ -201,7 +201,13 @@ width:100%;
     cursor:pointer;
   }
 
-  nav ul{
+.nav-links{
+    display:flex;
+}
+
+@media (max-width: 768px){
+
+  .nav-links{
     display:none;
     position:absolute;
     top:70px;
@@ -212,12 +218,11 @@ width:100%;
     padding:15px 0;
   }
 
-  nav ul li{
-    margin:10px 0;
-    text-align:center;
+  .nav-links a{
+    margin:15px 0;
   }
 
-  nav ul.active{
+  .nav-links.active{
     display:flex;
   }
 
