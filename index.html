@@ -189,23 +189,39 @@ width:100%;
 
 @media (max-width: 768px){
 
- .menu-toggle{
+  nav{
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .menu-toggle{
     display:block;
     font-size:28px;
     cursor:pointer;
   }
 
   nav ul{
-  display:none;
-  flex-direction:column;
-  width:100%;
-  background:white;
-}
+    display:none;
+    position:absolute;
+    top:70px;
+    left:0;
+    width:100%;
+    background:white;
+    flex-direction:column;
+    padding:15px 0;
+  }
 
-nav ul.active{
-  display:flex;
-}
+  nav ul li{
+    margin:10px 0;
+    text-align:center;
+  }
 
+  nav ul.active{
+    display:flex;
+  }
+
+}
 
 }
 </style>
