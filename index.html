@@ -171,6 +171,77 @@ background:#f1f8ff;
 text-align:center;
 }
 
+/* INFO PACIENTES */
+.info-cards{
+display:flex;
+flex-direction:column;
+gap:20px;
+max-width:900px;
+margin:0 auto;
+}
+
+.info-card{
+background:#f4f9ff;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 4px 15px rgba(0,0,0,0.07);
+border-left:5px solid #1976d2;
+}
+
+.info-card-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 25px;
+cursor:pointer;
+font-weight:600;
+font-size:17px;
+color:#0d47a1;
+background:white;
+transition:background 0.2s;
+}
+
+.info-card-header:hover{
+background:#e8f0fe;
+}
+
+.info-arrow{
+font-size:14px;
+transition:transform 0.3s;
+}
+
+.info-card-body{
+display:none;
+padding:25px;
+background:#f4f9ff;
+}
+
+.info-card-body.open{
+display:block;
+}
+
+.info-card-body h4{
+color:#1976d2;
+margin:18px 0 6px;
+}
+
+.info-card-body h4:first-child{
+margin-top:0;
+}
+
+.info-card-body ul{
+padding-left:20px;
+margin:6px 0;
+}
+
+.info-card-body ul li{
+margin-bottom:5px;
+}
+
+.info-cta{
+margin-top:20px;
+}
+
 /* FOOTER */
 footer{
 background:#0d47a1;
@@ -342,6 +413,135 @@ height:90vh;
 </div>
 </section>
 
+<!-- INFO PACIENTES -->
+<section id="info-pacientes" style="background:#fff;">
+  <h2 style="text-align:center;color:#0d47a1;margin-bottom:40px;">Información para Pacientes</h2>
+
+  <div class="info-cards">
+
+    <!-- HOMBRO -->
+    <div class="info-card">
+      <div class="info-card-header" onclick="toggleInfo('hombro')">
+        <span>🦴 Lesiones de Hombro / Manguito Rotador</span>
+        <span class="info-arrow" id="arrow-hombro">▼</span>
+      </div>
+      <div class="info-card-body" id="hombro">
+        <h4>¿Qué es el manguito rotador?</h4>
+        <p>Es un grupo de 4 músculos y tendones que rodean el hombro y permiten levantarlo y girarlo. Es una de las estructuras más importantes del hombro.</p>
+
+        <h4>¿Cómo se lesiona?</h4>
+        <p>Puede lesionarse por un golpe o caída repentina, o por desgaste gradual con el paso de los años, especialmente en personas que hacen movimientos repetitivos con el brazo como pintores, deportistas o amas de casa.</p>
+
+        <h4>Síntomas más comunes</h4>
+        <ul>
+          <li>Dolor en el hombro al levantar el brazo</li>
+          <li>Dolor que aumenta de noche e impide dormir</li>
+          <li>Dificultad para peinarse, vestirse o alcanzar objetos</li>
+          <li>Sensación de debilidad en el brazo</li>
+        </ul>
+
+        <h4>¿Tiene cura?</h4>
+        <p>Sí. Muchos casos se resuelven sin cirugía con fisioterapia, medicamentos e infiltraciones. Cuando el desgarro es grande, se puede reparar con artroscopia, una cirugía mínimamente invasiva con recuperación más rápida.</p>
+
+        <div class="info-cta">
+          <a href="https://wa.me/525534108562" class="btn">Agendar consulta</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RODILLA -->
+    <div class="info-card">
+      <div class="info-card-header" onclick="toggleInfo('rodilla')">
+        <span>🦵 Desgaste de Rodilla</span>
+        <span class="info-arrow" id="arrow-rodilla">▼</span>
+      </div>
+      <div class="info-card-body" id="rodilla">
+        <h4>¿Qué es el desgaste de rodilla?</h4>
+        <p>Es la pérdida progresiva del cartílago que protege los huesos de la rodilla. Con el tiempo, los huesos rozan entre sí causando dolor e inflamación. También se le conoce como artrosis o gonartrosis.</p>
+
+        <h4>¿Quiénes son más afectados?</h4>
+        <p>Personas mayores de 50 años, personas con sobrepeso, deportistas o quienes han tenido lesiones previas como rupturas de menisco o ligamentos.</p>
+
+        <h4>Síntomas más comunes</h4>
+        <ul>
+          <li>Dolor al caminar, subir escaleras o levantarse</li>
+          <li>Rigidez en la rodilla al despertar</li>
+          <li>Inflamación o sensación de calor en la articulación</li>
+          <li>Sensación de que la rodilla "truena" o "falla"</li>
+        </ul>
+
+        <h4>Opciones de tratamiento</h4>
+        <p>Dependiendo del grado de desgaste, el tratamiento puede ir desde fisioterapia y medicamentos, hasta infiltraciones con ácido hialurónico o cirugía artroscópica para casos moderados, y reemplazo total de rodilla en casos avanzados.</p>
+
+        <div class="info-cta">
+          <a href="https://wa.me/525534108562" class="btn">Agendar consulta</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIES -->
+    <div class="info-card">
+      <div class="info-card-header" onclick="toggleInfo('pies')">
+        <span>🦶 Deformidades en los Pies (Juanetes)</span>
+        <span class="info-arrow" id="arrow-pies">▼</span>
+      </div>
+      <div class="info-card-body" id="pies">
+        <h4>¿Qué es el Hallux Valgus?</h4>
+        <p>Es la deformidad más común del pie, conocida popularmente como "juanete". Consiste en una desviación del dedo gordo hacia los demás dedos, formando un bulto doloroso en la base del pie.</p>
+
+        <h4>¿Por qué aparece?</h4>
+        <p>Puede ser hereditario o desarrollarse por el uso prolongado de zapatos estrechos o de tacón alto. Es mucho más frecuente en mujeres.</p>
+
+        <h4>Síntomas más comunes</h4>
+        <ul>
+          <li>Bulto visible y doloroso en la base del dedo gordo</li>
+          <li>Dificultad para usar cierto tipo de calzado</li>
+          <li>Enrojecimiento, inflamación o ardor en la zona</li>
+          <li>Dolor al caminar que empeora con el tiempo</li>
+        </ul>
+
+        <h4>¿Tiene solución?</h4>
+        <p>El único tratamiento definitivo es quirúrgico. La cirugía corrige la deformidad del hueso y los tejidos, alivia el dolor y permite recuperar una pisada normal. La recuperación es progresiva y la mayoría de los pacientes retoman sus actividades en pocas semanas.</p>
+
+        <div class="info-cta">
+          <a href="https://wa.me/525534108562" class="btn">Agendar consulta</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LUMBALGIA -->
+    <div class="info-card">
+      <div class="info-card-header" onclick="toggleInfo('lumbalgia')">
+        <span>🔙 Lumbalgia (Dolor de Espalda Baja)</span>
+        <span class="info-arrow" id="arrow-lumbalgia">▼</span>
+      </div>
+      <div class="info-card-body" id="lumbalgia">
+        <h4>¿Qué es la lumbalgia?</h4>
+        <p>Es el dolor localizado en la parte baja de la espalda, entre las costillas y los glúteos. Es una de las causas más frecuentes de consulta médica y puede afectar a personas de cualquier edad.</p>
+
+        <h4>¿Por qué aparece?</h4>
+        <p>Las causas más comunes son el sedentarismo, malas posturas, esfuerzos físicos bruscos, hernia de disco, desgaste de las vértebras (espondiloartrosis) o tensión muscular acumulada por el estrés.</p>
+
+        <h4>Síntomas más comunes</h4>
+        <ul>
+          <li>Dolor en la zona baja de la espalda, continuo o en episodios</li>
+          <li>Dificultad para agacharse, levantarse o estar mucho tiempo de pie</li>
+          <li>Dolor que puede irradiarse hacia los glúteos o piernas (ciática)</li>
+          <li>Rigidez muscular al despertar</li>
+        </ul>
+
+        <h4>Opciones de tratamiento</h4>
+        <p>La mayoría de los casos mejora con reposo relativo, medicamentos antiinflamatorios, fisioterapia y ejercicios de fortalecimiento. En casos de hernia de disco o compresión nerviosa que no mejoran con tratamiento conservador, puede evaluarse una intervención quirúrgica mínimamente invasiva.</p>
+
+        <div class="info-cta">
+          <a href="https://wa.me/525534108562" class="btn">Agendar consulta</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- TESTIMONIOS -->
 <section class="testimonios">
 <h2>Opiniones</h2>
@@ -430,10 +630,16 @@ function cerrarMenu(){
   document.getElementById("navLinks").classList.remove("active");
 }
 
-// Cerrar menú al hacer scroll
 window.addEventListener('scroll', function(){
   document.getElementById("navLinks").classList.remove("active");
 });
+
+function toggleInfo(id){
+  var body = document.getElementById(id);
+  var arrow = document.getElementById("arrow-" + id);
+  body.classList.toggle("open");
+  arrow.style.transform = body.classList.contains("open") ? "rotate(180deg)" : "rotate(0deg)";
+}
 </script>
 
 </body>
