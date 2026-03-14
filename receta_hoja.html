@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receta Médica - Dr. Del Moral Carachure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+  font-family:'Jost', sans-serif;
+  background:#e8edf5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 20px 60px;
+  gap:30px;
+}
+
+/* ── HOJA CARTA COMPLETA ── */
+.receta{
+  width:216mm;
+  height:279mm;
+  background:white;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  border-radius:4px;
+}
+
+/* ── BARRA SUPERIOR ── */
+.top-bar{
+  background:linear-gradient(135deg, #1565c0, #42a5f5);
+  padding:20px 36px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.top-bar::after{
+  content:"";
+  position:absolute;
+  bottom:-30px; right:-30px;
+  width:160px; height:160px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.07);
+}
+
+.top-bar::before{
+  content:"";
+  position:absolute;
+  top:-40px; left:220px;
+  width:200px; height:200px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+
+.bar-left{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  position:relative;
+  z-index:1;
+}
+
+.bar-logo{
+  width:70px;
+  height:70px;
+  border-radius:12px;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.35);
+  box-shadow:0 4px 20px rgba(0,0,0,0.25);
+}
+
+.bar-dr{
+  font-size:10px;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.bar-name{
+  font-family:'Cormorant Garamond';
+  font-size:30px;
+  font-weight:600;
+  color:white;
+  line-height:1.0;
+  letter-spacing:-0.3px;
+}
+
+.bar-specialty{
+  font-size:9px;
+  color:rgba(255,255,255,0.65);
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-top:4px;
+}
+
+.bar-right{
+  text-align:right;
+  position:relative;
+  z-index:1;
+}
+
+.bar-cedula{
+  font-size:9.5px;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:0.5px;
+  line-height:2;
+}
+
+.bar-cedula strong{
+  color:white;
+  font-weight:600;
+}
+
+.bar-bone{
+  position:absolute;
+  right:180px; top:50%;
+  transform:translateY(-50%);
+  opacity:0.06;
+  z-index:0;
+}
+
+/* ── HOSPITALES ── */
+.hosp-strip{
+  background:#f0f6ff;
+  border-bottom:1px solid #dce8f8;
+  padding:8px 36px;
+  display:flex;
+  gap:36px;
+  align-items:center;
+  flex-shrink:0;
+}
+
+.hosp-item{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.hosp-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#42a5f5;
+  flex-shrink:0;
+}
+
+.hosp-name{
+  font-size:10px;
+  font-weight:600;
+  color:#0d47a1;
+}
+
+.hosp-addr{
+  font-size:8.5px;
+  color:#888;
+  margin-left:4px;
+}
+
+.hosp-div{
+  width:1px;
+  height:22px;
+  background:#cde;
+}
+
+/* ── BODY ── */
+.body{
+  flex:1;
+  padding:24px 36px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.datos-row{
+  display:grid;
+  grid-template-columns:2fr 1fr 90px 90px 90px;
+  gap:18px;
+  align-items:end;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.field-label{
+  font-size:8px;
+  font-weight:600;
+  color:#42a5f5;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.field-line{
+  border:none;
+  border-bottom:1.5px solid #dce8f8;
+  background:transparent;
+  color:#333;
+  font-family:'Jost';
+  font-size:13px;
+  padding:5px 0;
+  outline:none;
+  width:100%;
+  transition:border-color 0.2s;
+}
+
+.field-line:focus{
+  border-bottom-color:#42a5f5;
+}
+
+/* ── Rx SECCIÓN ── */
+.rx-row{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  flex:1;
+}
+
+.rx-symbol{
+  font-family:'Cormorant Garamond';
+  font-size:52px;
+  font-weight:300;
+  color:#42a5f5;
+  line-height:1;
+  font-style:italic;
+  flex-shrink:0;
+  margin-top:4px;
+}
+
+.rx-space{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.rx-label{
+  font-size:8px;
+  font-weight:600;
+  color:#42a5f5;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+/* Líneas para escribir */
+.write-line{
+  border-bottom:1px solid #e8f0fe;
+  height:32px;
+  width:100%;
+}
+
+/* ── INDICACIONES ── */
+.indicaciones-section{
+  border-top:1px dashed #dce8f8;
+  padding-top:14px;
+}
+
+.indicaciones-label{
+  font-size:8px;
+  font-weight:600;
+  color:#42a5f5;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.ind-lines{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.ind-line{
+  border-bottom:1px solid #e8f0fe;
+  height:28px;
+  width:100%;
+}
+
+/* ── FOOTER ── */
+.footer{
+  border-top:1px solid #e8f0fe;
+  padding:14px 36px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-shrink:0;
+  background:#fafcff;
+}
+
+.firma-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.firma-line{
+  width:160px;
+  border-bottom:1px solid #ccc;
+  height:40px;
+}
+
+.firma-label{
+  font-size:8px;
+  color:#aaa;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.sello-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.sello-circle{
+  width:70px;
+  height:70px;
+  border:1px dashed #ccc;
+  border-radius:50%;
+}
+
+.sello-label{
+  font-size:8px;
+  color:#aaa;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.footer-contact{
+  text-align:right;
+}
+
+.footer-tel{
+  font-size:16px;
+  font-weight:600;
+  color:#0d47a1;
+}
+
+.footer-web{
+  font-size:9px;
+  color:#42a5f5;
+  margin-top:3px;
+}
+
+.footer-note{
+  font-size:7.5px;
+  color:#bbb;
+  margin-top:8px;
+  line-height:1.6;
+}
+
+/* ── BOTÓN ── */
+.print-note{
+  font-size:11px;
+  color:#888;
+  text-align:center;
+  background:white;
+  padding:12px 24px;
+  border-radius:8px;
+  max-width:500px;
+  line-height:1.6;
+}
+
+.print-btn{
+  background:linear-gradient(135deg, #1565c0, #42a5f5);
+  color:white;
+  border:none;
+  padding:14px 38px;
+  border-radius:50px;
+  font-family:'Jost',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  transition:all 0.2s;
+  box-shadow:0 8px 25px rgba(21,101,192,0.35);
+}
+
+.print-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 35px rgba(21,101,192,0.45);
+}
+
+/* ── IMPRESIÓN ── */
+@media print{
+  @page {
+    size: letter portrait;
+    margin: 0;
+  }
+
+  body{
+    background:white;
+    padding:0;
+    gap:0;
+  }
+
+  .print-btn, .print-note{ display:none; }
+
+  .receta{
+    box-shadow:none;
+    border-radius:0;
+    width:216mm;
+    height:279mm;
+    page-break-after:always;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="receta">
+
+  <!-- BARRA SUPERIOR -->
+  <div class="top-bar">
+    <div class="bar-left">
+      <img src="logo.jpeg" class="bar-logo" alt="Logo">
+      <div>
+        <div class="bar-dr">Dr.</div>
+        <div class="bar-name">Del Moral Carachure</div>
+        <div class="bar-specialty">Traumatología · Ortopedia · Cirugía Artroscópica</div>
+      </div>
+    </div>
+    <svg class="bar-bone" width="100" height="100" viewBox="0 0 100 100" fill="white">
+      <path d="M30 15 C30 8 38 5 42 10 C46 15 44 22 38 24 L62 24 C56 22 54 15 58 10 C62 5 70 8 70 15 C70 22 63 26 58 28 L58 72 C63 74 70 78 70 85 C70 92 62 95 58 90 C54 85 56 78 62 76 L38 76 C44 78 46 85 42 90 C38 95 30 92 30 85 C30 78 37 74 42 72 L42 28 C37 26 30 22 30 15Z"/>
+    </svg>
+    <div class="bar-right">
+      <div class="bar-cedula">Cédula Prof. <strong>12818525</strong></div>
+      <div class="bar-cedula">Esp. Ortopedia <strong>UNAM</strong></div>
+      <div class="bar-cedula">Alta Esp. Artroscopia <strong>UNAM</strong></div>
+    </div>
+  </div>
+
+  <!-- HOSPITALES -->
+  <div class="hosp-strip">
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Hospital MAC La Viga</div>
+      <div class="hosp-addr">Calzada La Viga #1174, Consultorio 725</div>
+    </div>
+    <div class="hosp-div"></div>
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Ángeles Metropolitano</div>
+      <div class="hosp-addr">Tlacotalpan 59, Consultorio 425, Torre Diamante, Roma Sur</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- DATOS PACIENTE -->
+    <div class="datos-row">
+      <div class="field">
+        <div class="field-label">Nombre del Paciente</div>
+        <input class="field-line" type="text">
+      </div>
+      <div class="field">
+        <div class="field-label">Fecha</div>
+        <input class="field-line" type="text">
+      </div>
+      <div class="field">
+        <div class="field-label">Edad</div>
+        <input class="field-line" type="text">
+      </div>
+      <div class="field">
+        <div class="field-label">Sexo</div>
+        <input class="field-line" type="text">
+      </div>
+      <div class="field">
+        <div class="field-label">Peso</div>
+        <input class="field-line" type="text">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">🦴 Diagnóstico</div>
+      <input class="field-line" type="text">
+    </div>
+
+    <!-- MEDICAMENTOS -->
+    <div class="rx-space">
+      <div class="rx-label">Medicamentos</div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <!-- INDICACIONES -->
+    <div class="indicaciones-section">
+      <div class="indicaciones-label">Indicaciones / Notas</div>
+      <div class="ind-lines">
+        <div class="ind-line"></div>
+        <div class="ind-line"></div>
+        <div class="ind-line"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="firma-block">
+      <div class="firma-line"></div>
+      <div class="firma-label">Firma del Médico</div>
+    </div>
+    <div class="sello-block">
+      <div class="sello-circle"></div>
+      <div class="sello-label">Sello</div>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-tel">55 3410 8562</div>
+      <div class="footer-web">ortopediadelmoral.com.mx</div>
+      <div class="footer-note">Válida con firma y sello · Ciudad de México</div>
+    </div>
+  </div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+<p class="print-note">Imprime <strong>1 receta por hoja</strong> tamaño carta.<br>Activa "Gráficos de fondo" para que salga la barra azul.</p>
+
+</body>
+</html>
