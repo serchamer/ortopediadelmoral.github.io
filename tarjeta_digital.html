@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Del Moral Carachure · Traumatología y Ortopedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --dark: #060d1f;
+  --navy: #0a1f5c;
+  --blue: #0d47a1;
+  --mid: #1976d2;
+  --light: #42a5f5;
+  --pale: #90caf9;
+  --gold: #c8a96e;
+  --white: #ffffff;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+  font-family:'Jost', sans-serif;
+  background:var(--dark);
+  color:var(--white);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:0 0 60px;
+}
+
+.card{
+  width:100%;
+  max-width:420px;
+  position:relative;
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  height:300px;
+  overflow:hidden;
+}
+
+.hero-bg{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  filter:brightness(0.5);
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,
+    rgba(6,13,31,0) 0%,
+    rgba(6,13,31,0.3) 40%,
+    rgba(6,13,31,0.85) 75%,
+    rgba(6,13,31,1) 100%
+  );
+}
+
+/* Ondas decorativas */
+.hero-wave{
+  position:absolute;
+  bottom:-1px; left:0;
+  width:100%;
+}
+
+.hero-content{
+  position:absolute;
+  bottom:30px; left:0; right:0;
+  padding:0 28px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.hero-text{}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(200,169,110,0.15);
+  border:1px solid rgba(200,169,110,0.35);
+  border-radius:50px;
+  padding:4px 12px;
+  font-size:9px;
+  font-weight:500;
+  color:var(--gold);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.hero-name-dr{
+  font-size:11px;
+  font-weight:400;
+  color:var(--pale);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.hero-name{
+  font-family:'Cormorant Garamond';
+  font-size:34px;
+  font-weight:600;
+  line-height:1.0;
+  letter-spacing:-0.5px;
+}
+
+.hero-specialty{
+  font-size:10px;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-top:6px;
+}
+
+.hero-logo{
+  width:72px;
+  height:72px;
+  border-radius:14px;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.15);
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);
+  flex-shrink:0;
+}
+
+/* ── BODY ── */
+.body{
+  padding:0 24px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+/* Divider */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* ── BOTONES CTA ── */
+.cta-row{
+  display:flex;
+  gap:12px;
+}
+
+.cta-btn{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:16px 12px;
+  border-radius:14px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:0.5px;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+
+.cta-btn:hover{
+  transform:translateY(-2px);
+}
+
+.cta-whatsapp{
+  background:linear-gradient(135deg, #1a7a45, #25a155);
+  color:white;
+  box-shadow:0 8px 25px rgba(37,161,85,0.35);
+}
+
+.cta-call{
+  background:linear-gradient(135deg, #0d47a1, #1976d2);
+  color:white;
+  box-shadow:0 8px 25px rgba(13,71,161,0.35);
+}
+
+/* ── CERTIFICACIONES ── */
+.cert-row{
+  display:flex;
+  gap:10px;
+}
+
+.cert-item{
+  flex:1;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:14px 12px;
+  text-align:center;
+}
+
+.cert-icon{
+  font-size:20px;
+  margin-bottom:6px;
+}
+
+.cert-title{
+  font-size:10px;
+  font-weight:600;
+  color:var(--pale);
+  letter-spacing:0.5px;
+}
+
+.cert-sub{
+  font-size:9px;
+  color:rgba(255,255,255,0.4);
+  margin-top:3px;
+  line-height:1.4;
+}
+
+/* ── HOSPITALES ── */
+.section-title{
+  font-size:9px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  margin-bottom:14px;
+}
+
+.hospital-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:18px 18px;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  margin-bottom:12px;
+  transition:background 0.2s;
+}
+
+.hospital-card:hover{
+  background:rgba(255,255,255,0.07);
+}
+
+.hospital-card:last-child{
+  margin-bottom:0;
+}
+
+.hosp-icon-wrap{
+  width:40px;
+  height:40px;
+  background:linear-gradient(135deg, var(--blue), var(--mid));
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  flex-shrink:0;
+}
+
+.hosp-info{}
+
+.hosp-name{
+  font-size:13px;
+  font-weight:600;
+  color:white;
+  line-height:1.2;
+}
+
+.hosp-addr{
+  font-size:11px;
+  color:rgba(255,255,255,0.45);
+  line-height:1.6;
+  margin-top:4px;
+}
+
+.hosp-maps{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:8px;
+  font-size:10px;
+  color:var(--light);
+  text-decoration:none;
+  font-weight:500;
+  letter-spacing:0.5px;
+}
+
+/* ── QR ── */
+.qr-section{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:22px;
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.qr-img{
+  width:90px;
+  height:90px;
+  background:white;
+  border-radius:10px;
+  padding:6px;
+  flex-shrink:0;
+}
+
+.qr-img img{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.qr-text{}
+
+.qr-title{
+  font-size:14px;
+  font-weight:600;
+  color:white;
+  margin-bottom:5px;
+}
+
+.qr-sub{
+  font-size:11px;
+  color:rgba(255,255,255,0.45);
+  line-height:1.6;
+}
+
+.qr-url{
+  display:inline-block;
+  margin-top:8px;
+  font-size:11px;
+  color:var(--light);
+  font-weight:500;
+}
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;
+  padding-top:10px;
+}
+
+.footer-name{
+  font-family:'Cormorant Garamond';
+  font-size:16px;
+  color:rgba(255,255,255,0.3);
+  letter-spacing:1px;
+}
+
+.footer-cedula{
+  font-size:10px;
+  color:rgba(255,255,255,0.2);
+  letter-spacing:1px;
+  margin-top:4px;
+}
+
+/* ── ANIMACIONES ── */
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(20px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.body > *{
+  animation: fadeUp 0.5s ease both;
+}
+
+.body > *:nth-child(1){ animation-delay:0.1s; }
+.body > *:nth-child(2){ animation-delay:0.2s; }
+.body > *:nth-child(3){ animation-delay:0.3s; }
+.body > *:nth-child(4){ animation-delay:0.4s; }
+.body > *:nth-child(5){ animation-delay:0.5s; }
+.body > *:nth-child(6){ animation-delay:0.6s; }
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="doctor1.jpeg" class="hero-bg" alt="Dr. Del Moral">
+    <div class="hero-overlay"></div>
+
+    <svg class="hero-wave" viewBox="0 0 420 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 20 C80 0, 160 40, 240 18 C320 -4, 370 30, 420 15 L420 40 L0 40 Z" fill="#060d1f"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">🏅 Especialista Certificado</div>
+        <div class="hero-name-dr">Dr.</div>
+        <div class="hero-name">Del Moral Carachure</div>
+        <div class="hero-specialty">Traumatología · Ortopedia · CDMX</div>
+      </div>
+      <img src="logo.jpeg" class="hero-logo" alt="Logo">
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- BOTONES -->
+    <div class="cta-row">
+      <a href="https://wa.me/525534108562" class="cta-btn cta-whatsapp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.123 1.523 5.858L.057 23.786a.5.5 0 0 0 .614.644l6.094-1.598A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.163-1.426l-.369-.22-3.821 1.002 1.02-3.72-.241-.383A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp
+      </a>
+      <a href="tel:+525534108562" class="cta-btn cta-call">
+        📞 Llamar
+      </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CERTIFICACIONES -->
+    <div class="cert-row">
+      <div class="cert-item">
+        <div class="cert-icon">🎓</div>
+        <div class="cert-title">IPN · UNAM</div>
+        <div class="cert-sub">Médico Cirujano<br>Traumatología</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🏅</div>
+        <div class="cert-title">Certificado CMO</div>
+        <div class="cert-sub">Consejo Mexicano<br>de Ortopedia</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🔬</div>
+        <div class="cert-title">Artroscopia</div>
+        <div class="cert-sub">Alta Especialidad<br>UNAM</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- HOSPITALES -->
+    <div>
+      <div class="section-title">📍 Consultorios</div>
+
+      <div class="hospital-card">
+        <div class="hosp-icon-wrap">🏥</div>
+        <div class="hosp-info">
+          <div class="hosp-name">Hospital MAC La Viga</div>
+          <div class="hosp-addr">Calzada La Viga #1174, Consultorio 725<br>Ciudad de México</div>
+          <a href="https://maps.google.com/?q=Hospital+MAC+La+Viga+Calzada+La+Viga+1174+CDMX" class="hosp-maps" target="_blank">
+            🗺 Ver en mapa
+          </a>
+        </div>
+      </div>
+
+      <div class="hospital-card">
+        <div class="hosp-icon-wrap">🏨</div>
+        <div class="hosp-info">
+          <div class="hosp-name">Hospital Ángeles Metropolitano</div>
+          <div class="hosp-addr">Tlacotalpan 59, Consultorio 425, Torre Diamante<br>Roma Sur, Cuauhtémoc, CDMX</div>
+          <a href="https://maps.google.com/?q=Hospital+Angeles+Metropolitano+Tlacotalpan+59+Roma+Sur+CDMX" class="hosp-maps" target="_blank">
+            🗺 Ver en mapa
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- QR -->
+    <div class="qr-section">
+      <div class="qr-img">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://ortopediadelmoral.com.mx&bgcolor=ffffff&color=0a1f5c&margin=2" alt="QR">
+      </div>
+      <div class="qr-text">
+        <div class="qr-title">Visita mi página web</div>
+        <div class="qr-sub">Escanea el código QR o toca el enlace para ver más información, servicios y agendar cita.</div>
+        <a href="https://ortopediadelmoral.com.mx" class="qr-url" target="_blank">ortopediadelmoral.com.mx →</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-name">Dr. Del Moral Carachure</div>
+      <div class="footer-cedula">Cédula Profesional 12818525</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
