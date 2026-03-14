@@ -56,16 +56,28 @@
     "addressRegion": "CDMX",
     "addressCountry": "MX"
   },
-  "location": {
-    "@type": "Hospital",
-    "name": "Hospital MAC La Viga",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Calzada La Viga #1174",
-      "addressLocality": "Ciudad de México",
-      "addressCountry": "MX"
+  "location": [
+    {
+      "@type": "Hospital",
+      "name": "Hospital MAC La Viga",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calzada La Viga #1174",
+        "addressLocality": "Ciudad de México",
+        "addressCountry": "MX"
+      }
+    },
+    {
+      "@type": "Hospital",
+      "name": "Hospital Ángeles Metropolitano",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Tlacotalpan 59, Consultorio 425, Torre Diamante, Roma Sur",
+        "addressLocality": "Ciudad de México",
+        "addressCountry": "MX"
+      }
     }
-  },
+  ],
   "sameAs": [
     "https://www.instagram.com/sergiodelmoral1",
     "https://www.tiktok.com/@sergiodelmoral178",
@@ -371,26 +383,53 @@ padding:20px;
 /* UBICACION */
 .ubicacion{
 display:flex;
-gap:40px;
-flex-wrap:wrap;
+flex-direction:column;
+gap:50px;
 }
 
-.info{
+.hospital-block{
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+align-items:flex-start;
+}
+
+.hospital-block .info{
 flex:1;
+min-width:250px;
 background:white;
-padding:25px;
+padding:28px;
 border-radius:15px;
 box-shadow:0 6px 20px rgba(0,0,0,0.08);
+border-top:4px solid #1976d2;
 }
 
-.mapa{
-flex:1;
+.hospital-icon{
+font-size:36px;
+margin-bottom:12px;
+}
+
+.hospital-block .info h3{
+color:#0d47a1;
+margin:0 0 12px;
+font-size:18px;
+}
+
+.hospital-block .info p{
+margin:6px 0;
+font-size:15px;
+line-height:1.6;
+color:#444;
+}
+
+.hospital-block .mapa{
+flex:2;
 min-width:280px;
 }
 
 iframe{
 width:100%;
-height:400px;
+height:350px;
 border-radius:15px;
 border:0;
 }
@@ -827,21 +866,37 @@ height:90vh;
 
 <!-- UBICACION -->
 <section id="ubicacion">
-<h2>Nuestra Ubicación</h2>
+<h2 style="text-align:center;color:#0d47a1;margin-bottom:40px;">Nuestras Ubicaciones</h2>
 
 <div class="ubicacion">
 
-<div class="info">
-<p><strong>Hospital MAC La Viga</strong><br>
-Calzada La Viga #1174<br>
-Ciudad de México</p>
+  <!-- HOSPITAL 1 -->
+  <div class="hospital-block">
+    <div class="info">
+      <div class="hospital-icon">🏥</div>
+      <h3>Hospital MAC La Viga</h3>
+      <p>📍 Calzada La Viga #1174, Consultorio 725<br>Ciudad de México</p>
+      <p>📞 <strong>55 3410 8562</strong></p>
+      <a href="https://wa.me/525534108562" class="btn" style="margin-top:10px;font-size:14px;padding:10px 20px;">Agendar aquí</a>
+    </div>
+    <div class="mapa">
+      <iframe src="https://www.google.com/maps?q=Hospital+MAC+La+Viga+Calzada+La+Viga+1174+Ciudad+de+Mexico&output=embed" title="Hospital MAC La Viga"></iframe>
+    </div>
+  </div>
 
-<p><strong>Tel:</strong> 55 3410 8562</p>
-</div>
-
-<div class="mapa">
-<iframe src="https://www.google.com/maps?q=Hospital+MAC+La+Viga+Ciudad+de+Mexico&output=embed" title="Mapa Hospital MAC La Viga"></iframe>
-</div>
+  <!-- HOSPITAL 2 -->
+  <div class="hospital-block">
+    <div class="info">
+      <div class="hospital-icon">🏨</div>
+      <h3>Hospital Ángeles Metropolitano</h3>
+      <p>📍 Tlacotalpan 59, Consultorio 425<br>Torre Diamante, Roma Sur<br>Cuauhtémoc, CDMX</p>
+      <p>📞 <strong>55 3410 8562</strong></p>
+      <a href="https://wa.me/525534108562" class="btn" style="margin-top:10px;font-size:14px;padding:10px 20px;">Agendar aquí</a>
+    </div>
+    <div class="mapa">
+      <iframe src="https://www.google.com/maps?q=Hospital+Angeles+Metropolitano+Tlacotalpan+59+Roma+Sur+Ciudad+de+Mexico&output=embed" title="Hospital Ángeles Metropolitano"></iframe>
+    </div>
+  </div>
 
 </div>
 </section>
