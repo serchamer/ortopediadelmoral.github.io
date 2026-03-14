@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recetario - Dr. Del Moral Carachure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+  font-family:'Jost', sans-serif;
+  background:#e8edf5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px 20px 60px;
+  gap:24px;
+}
+
+/* ── CONTROLES ── */
+.controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.btn{
+  padding:13px 30px;
+  border-radius:50px;
+  border:none;
+  font-family:'Jost';
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+
+.btn-print{
+  background:linear-gradient(135deg, #1565c0, #42a5f5);
+  color:white;
+  box-shadow:0 6px 20px rgba(21,101,192,0.35);
+}
+
+.btn-clear{
+  background:white;
+  color:#666;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn:hover{ transform:translateY(-2px); }
+
+.note{
+  font-size:11px;
+  color:#888;
+  text-align:center;
+  line-height:1.7;
+  max-width:500px;
+  background:white;
+  padding:12px 24px;
+  border-radius:8px;
+}
+
+/* ── RECETA TAMAÑO CARTA ── */
+.receta{
+  width:216mm;
+  min-height:279mm;
+  background:white;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  border-radius:4px;
+}
+
+/* ── BARRA SUPERIOR ── */
+.top-bar{
+  background:linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+  padding:18px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.top-bar::after{
+  content:"";
+  position:absolute;
+  bottom:-35px; right:-35px;
+  width:160px; height:160px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.07);
+}
+
+.top-bar::before{
+  content:"";
+  position:absolute;
+  top:-45px; left:250px;
+  width:180px; height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+
+.bar-left{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  position:relative;
+  z-index:1;
+}
+
+.bar-logo{
+  width:65px;
+  height:65px;
+  border-radius:12px;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.3);
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+.bar-dr{
+  font-size:10px;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.bar-name{
+  font-family:'Cormorant Garamond';
+  font-size:26px;
+  font-weight:600;
+  color:white;
+  line-height:1.0;
+}
+
+.bar-specialty{
+  font-size:9px;
+  color:rgba(255,255,255,0.65);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-top:4px;
+}
+
+.bar-bone{
+  position:absolute;
+  right:180px; top:50%;
+  transform:translateY(-50%);
+  opacity:0.07;
+  z-index:0;
+}
+
+.bar-right{
+  text-align:right;
+  position:relative;
+  z-index:1;
+}
+
+.bar-cedula{
+  font-size:9px;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:0.5px;
+  line-height:2;
+}
+
+.bar-cedula strong{ color:white; font-weight:600; }
+
+/* ── HOSPITALES ── */
+.hosp-strip{
+  background:#f0f6ff;
+  border-bottom:1px solid #dce8f8;
+  padding:8px 32px;
+  display:flex;
+  gap:35px;
+  align-items:center;
+  flex-shrink:0;
+}
+
+.hosp-item{ display:flex; align-items:center; gap:7px; }
+.hosp-dot{ width:5px; height:5px; border-radius:50%; background:#42a5f5; flex-shrink:0; }
+.hosp-name{ font-size:10px; font-weight:600; color:#0d47a1; }
+.hosp-addr{ font-size:8.5px; color:#888; margin-left:4px; }
+.hosp-div{ width:1px; height:22px; background:#cde; }
+
+/* ── BODY ── */
+.body{
+  flex:1;
+  padding:28px 32px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* DATOS PACIENTE */
+.datos-row{
+  display:grid;
+  grid-template-columns:2.5fr 1fr 80px 80px 80px;
+  gap:16px;
+  align-items:end;
+}
+
+.field{ display:flex; flex-direction:column; gap:5px; }
+
+.field-label{
+  font-size:8px;
+  font-weight:600;
+  color:#42a5f5;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+}
+
+.field-input{
+  border:none;
+  border-bottom:1.5px solid #dce8f8;
+  background:transparent;
+  color:#222;
+  font-family:'Jost';
+  font-size:14px;
+  padding:5px 0;
+  outline:none;
+  width:100%;
+  transition:border-color 0.2s;
+}
+
+.field-input:focus{ border-bottom-color:#42a5f5; }
+
+/* DIAGNÓSTICO */
+.diag-box{
+  background:#f7fbff;
+  border:1px solid #dce8f8;
+  border-left:3px solid #42a5f5;
+  border-radius:0 8px 8px 0;
+  padding:14px 18px;
+}
+
+.diag-input{
+  width:100%;
+  border:none;
+  background:transparent;
+  color:#222;
+  font-family:'Jost';
+  font-size:14px;
+  outline:none;
+  margin-top:6px;
+}
+
+/* MEDICAMENTOS */
+.meds-box{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.med-line{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+
+.med-num{
+  font-size:11px;
+  font-weight:600;
+  color:#42a5f5;
+  flex-shrink:0;
+  width:20px;
+  padding-bottom:5px;
+}
+
+.med-input{
+  flex:1;
+  border:none;
+  border-bottom:1.5px solid #e0ecf8;
+  background:transparent;
+  color:#222;
+  font-family:'Jost';
+  font-size:14px;
+  padding:5px 0;
+  outline:none;
+  transition:border-color 0.2s;
+}
+
+.med-input:focus{ border-bottom-color:#42a5f5; }
+
+/* ── FOOTER ── */
+.footer{
+  border-top:1px solid #e0ecf8;
+  padding:16px 32px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  flex-shrink:0;
+  background:#fafcff;
+}
+
+.firma-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+
+.firma-img{
+  width:220px;
+  height:100px;
+  object-fit:contain;
+  object-position:center bottom;
+  display:block;
+  filter:invert(1) contrast(2) brightness(0.7);
+  mix-blend-mode:multiply;
+}
+
+.firma-line-static{
+  width:220px;
+  border-bottom:1.5px solid #aaa;
+}
+
+.firma-label{
+  font-size:8px;
+  color:#888;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  text-align:center;
+  margin-top:4px;
+}
+
+.sello-block{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+
+.sello-circle{
+  width:70px; height:70px;
+  border:1.5px dashed #ccc;
+  border-radius:50%;
+}
+
+.sello-label{
+  font-size:8px;
+  color:#aaa;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.footer-contact{ text-align:right; }
+.footer-tel{ font-size:15px; font-weight:600; color:#0d47a1; }
+.footer-web{ font-size:9px; color:#42a5f5; margin-top:3px; }
+.footer-note{ font-size:7.5px; color:#bbb; margin-top:8px; line-height:1.6; }
+
+/* ── PRINT ── */
+@media print{
+  body{ background:white; padding:0; gap:0; }
+  .controls, .note{ display:none; }
+  .receta{ box-shadow:none; width:100%; min-height:100vh; border-radius:0; }
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <button class="btn btn-clear" onclick="limpiar()">🗑️ Nueva Receta</button>
+</div>
+
+<div class="receta">
+
+  <!-- BARRA SUPERIOR -->
+  <div class="top-bar">
+    <div class="bar-left">
+      <img src="logo.jpeg" class="bar-logo" alt="Logo">
+      <div>
+        <div class="bar-dr">Dr.</div>
+        <div class="bar-name">Del Moral Carachure</div>
+        <div class="bar-specialty">Traumatología · Ortopedia · Cirugía Artroscópica</div>
+      </div>
+    </div>
+    <svg class="bar-bone" width="90" height="90" viewBox="0 0 100 100" fill="white">
+      <path d="M30 15 C30 8 38 5 42 10 C46 15 44 22 38 24 L62 24 C56 22 54 15 58 10 C62 5 70 8 70 15 C70 22 63 26 58 28 L58 72 C63 74 70 78 70 85 C70 92 62 95 58 90 C54 85 56 78 62 76 L38 76 C44 78 46 85 42 90 C38 95 30 92 30 85 C30 78 37 74 42 72 L42 28 C37 26 30 22 30 15Z"/>
+    </svg>
+    <div class="bar-right">
+      <div class="bar-cedula">Cédula Prof. <strong>12818525</strong></div>
+      <div class="bar-cedula">Esp. Ortopedia <strong>UNAM</strong></div>
+      <div class="bar-cedula">Alta Esp. Artroscopia <strong>UNAM</strong></div>
+    </div>
+  </div>
+
+  <!-- HOSPITALES -->
+  <div class="hosp-strip">
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Hospital MAC La Viga</div>
+      <div class="hosp-addr">Calzada La Viga #1174, Consultorio 725</div>
+    </div>
+    <div class="hosp-div"></div>
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Ángeles Metropolitano</div>
+      <div class="hosp-addr">Tlacotalpan 59, Consultorio 425, Torre Diamante, Roma Sur</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- DATOS -->
+    <div class="datos-row">
+      <div class="field">
+        <div class="field-label">Nombre del Paciente</div>
+        <input class="field-input" id="nombre" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <div class="field-label">Fecha</div>
+        <input class="field-input" id="fecha" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <div class="field-label">Edad</div>
+        <input class="field-input" id="edad" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <div class="field-label">Sexo</div>
+        <input class="field-input" id="sexo" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <div class="field-label">Peso</div>
+        <input class="field-input" id="peso" type="text" autocomplete="off">
+      </div>
+    </div>
+
+    <!-- DIAGNÓSTICO -->
+    <div class="diag-box">
+      <div class="field-label">🦴 Diagnóstico</div>
+      <input class="diag-input" id="diag" type="text" autocomplete="off">
+    </div>
+
+    <!-- MEDICAMENTOS -->
+    <div class="meds-box">
+      <div class="field-label">Medicamentos</div>
+      <div class="med-line"><span class="med-num">1.</span><input class="med-input" type="text" autocomplete="off"></div>
+      <div class="med-line"><span class="med-num">2.</span><input class="med-input" type="text" autocomplete="off"></div>
+      <div class="med-line"><span class="med-num">3.</span><input class="med-input" type="text" autocomplete="off"></div>
+      <div class="med-line"><span class="med-num">4.</span><input class="med-input" type="text" autocomplete="off"></div>
+      <div class="med-line"><span class="med-num">5.</span><input class="med-input" type="text" autocomplete="off"></div>
+      <div class="med-line"><span class="med-num">6.</span><input class="med-input" type="text" autocomplete="off"></div>
+      <div class="med-line"><span class="med-num">7.</span><input class="med-input" type="text" autocomplete="off"></div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER CON FIRMA -->
+  <div class="footer">
+    <div class="firma-block">
+      <img src="firma.png" class="firma-img" alt="Firma"
+           onerror="this.style.display='none'">
+      <div class="firma-line-static"></div>
+      <div class="firma-label">Dr. Del Moral Carachure</div>
+    </div>
+    <div class="sello-block">
+      <div class="sello-circle"></div>
+      <div class="sello-label">Sello</div>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-tel">55 3410 8562</div>
+      <div class="footer-web">ortopediadelmoral.com.mx</div>
+      <div class="footer-note">
+        Válida únicamente con firma y sello del médico<br>
+        Ciudad de México
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="controls">
+  <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+  <button class="btn btn-clear" onclick="limpiar()">🗑️ Nueva Receta</button>
+</div>
+
+<p class="note">
+  ✅ Llena los campos en pantalla → Imprime → 1 receta por hoja carta<br>
+  📁 Guarda <strong>firma.jpeg</strong> y <strong>logo.jpeg</strong> en la misma carpeta que este archivo<br>
+  🖨️ Activa <strong>"Gráficos de fondo"</strong> al imprimir para la barra azul
+</p>
+
+<script>
+function limpiar(){
+  document.querySelectorAll('.field-input, .diag-input, .med-input')
+    .forEach(i => i.value = '');
+  document.getElementById('nombre').focus();
+}
+</script>
+
+</body>
+</html>
