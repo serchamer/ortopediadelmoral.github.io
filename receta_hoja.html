@@ -219,6 +219,18 @@ body{
 .field-line:focus{
   border-bottom-color:#42a5f5;
 }
+.write-input{
+  height:32px;
+  font-size:13px;
+  margin-bottom:0;
+}
+@media print{
+  .write-input{
+    border-bottom:1px solid #e8f0fe !important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+}
 
 /* ── Rx SECCIÓN ── */
 .rx-row{
@@ -496,23 +508,23 @@ body{
     <!-- MEDICAMENTOS -->
     <div class="rx-space">
       <div class="rx-label">Medicamentos</div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
-      <div class="write-line"></div>
+      <input class="field-line write-input" type="text" placeholder="">
+      <input class="field-line write-input" type="text" placeholder="">
+      <input class="field-line write-input" type="text" placeholder="">
+      <input class="field-line write-input" type="text" placeholder="">
+      <input class="field-line write-input" type="text" placeholder="">
+      <input class="field-line write-input" type="text" placeholder="">
+      <input class="field-line write-input" type="text" placeholder="">
+      <input class="field-line write-input" type="text" placeholder="">
     </div>
 
     <!-- INDICACIONES -->
     <div class="indicaciones-section">
       <div class="indicaciones-label">Indicaciones / Notas</div>
       <div class="ind-lines">
-        <div class="ind-line"></div>
-        <div class="ind-line"></div>
-        <div class="ind-line"></div>
+        <input class="field-line write-input" type="text" placeholder="">
+        <input class="field-line write-input" type="text" placeholder="">
+        <input class="field-line write-input" type="text" placeholder="">
       </div>
     </div>
 
