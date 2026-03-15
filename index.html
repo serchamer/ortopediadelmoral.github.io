@@ -55,7 +55,9 @@
 }
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 body{ margin:0; font-family:'Poppins',sans-serif; background:#f4f9ff; }
@@ -345,15 +347,15 @@ footer p{ margin:0 0 15px; font-size:15px; }
   <h2 style="text-align:center;color:#0d47a1;">Servicios Especializados</h2>
   <div class="servicios">
     <div class="servicio">
-      <img src="hombro.png" alt="Lesiones de Hombro">
+      <img loading="lazy" src="hombro.png" alt="Lesiones de Hombro">
       <div><h3>Lesiones de Hombro</h3><p>Manguito rotador, luxaciones y artroscopia.</p></div>
     </div>
     <div class="servicio">
-      <img src="rodilla.jpg" alt="Desgaste de Rodilla">
+      <img loading="lazy" src="rodilla.jpg" alt="Desgaste de Rodilla">
       <div><h3>Desgaste de Rodilla</h3><p>Meniscos, ligamento cruzado y artrosis.</p></div>
     </div>
     <div class="servicio">
-      <img src="antesdespues.jpeg" alt="Deformidades en los Pies">
+      <img loading="lazy" src="antesdespues.jpeg" alt="Deformidades en los Pies">
       <div><h3>Deformidades en los Pies</h3><p>Corrección de Hallux Valgus.</p></div>
     </div>
   </div>
@@ -368,42 +370,42 @@ footer p{ margin:0 0 15px; font-size:15px; }
     <div id="videoCarrusel">
 
       <div class="video-slide">
-        <video controls playsinline preload="none">
+        <video controls playsinline preload="none" style="width:100%;aspect-ratio:9/16;object-fit:contain;background:#000;display:block;">
           <source src="mango2.mp4" type="video/mp4">
         </video>
         <div class="video-label">Manguito Rotador</div>
       </div>
 
       <div class="video-slide">
-        <video controls playsinline preload="none">
+        <video controls playsinline preload="none" style="width:100%;aspect-ratio:9/16;object-fit:contain;background:#000;display:block;">
           <source src="mango1.mp4" type="video/mp4">
         </video>
         <div class="video-label">Lesión de Manguito Rotador</div>
       </div>
 
       <div class="video-slide">
-        <video controls playsinline preload="none">
+        <video controls playsinline preload="none" style="width:100%;aspect-ratio:9/16;object-fit:contain;background:#000;display:block;">
           <source src="hallux2.mp4" type="video/mp4">
         </video>
         <div class="video-label">Hallux Valgus</div>
       </div>
 
       <div class="video-slide">
-        <video controls playsinline preload="none">
+        <video controls playsinline preload="none" style="width:100%;aspect-ratio:9/16;object-fit:contain;background:#000;display:block;">
           <source src="cruzadoanterior.mp4" type="video/mp4">
         </video>
         <div class="video-label">Ligamento Cruzado Anterior</div>
       </div>
 
       <div class="video-slide">
-        <video controls playsinline preload="none">
+        <video controls playsinline preload="none" style="width:100%;aspect-ratio:9/16;object-fit:contain;background:#000;display:block;">
           <source src="bicepsdistal.mp4" type="video/mp4">
         </video>
         <div class="video-label">Ruptura de Bíceps Distal</div>
       </div>
 
       <div class="video-slide">
-        <video controls playsinline preload="none">
+        <video controls playsinline preload="none" style="width:100%;aspect-ratio:9/16;object-fit:contain;background:#000;display:block;">
           <source src="hallux1.mp4" type="video/mp4">
         </video>
         <div class="video-label">Corrección de Hallux</div>
@@ -524,7 +526,12 @@ footer p{ margin:0 0 15px; font-size:15px; }
         <a href="https://wa.me/525534108562" class="btn" style="margin-top:10px;font-size:14px;padding:10px 20px;">Agendar aquí</a>
       </div>
       <div class="mapa">
-        <iframe src="https://www.google.com/maps?q=Hospital+MAC+La+Viga+Calzada+La+Viga+1174+Ciudad+de+Mexico&output=embed" title="Hospital MAC La Viga"></iframe>
+        <div class="mapa-placeholder" onclick="loadMap(this, 'https://www.google.com/maps?q=Hospital+MAC+La+Viga+Calzada+La+Viga+1174+Ciudad+de+Mexico&output=embed', 'Hospital MAC La Viga')"
+          style="width:100%;height:350px;border-radius:15px;background:#e8f0fe;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:12px;">
+          <div style="font-size:40px;">🗺️</div>
+          <div style="font-weight:600;color:#1976d2;font-size:15px;">Ver en Google Maps</div>
+          <div style="font-size:12px;color:#888;">Toca para cargar el mapa</div>
+        </div>
       </div>
     </div>
     <div class="hospital-block">
@@ -536,7 +543,12 @@ footer p{ margin:0 0 15px; font-size:15px; }
         <a href="https://wa.me/525534108562" class="btn" style="margin-top:10px;font-size:14px;padding:10px 20px;">Agendar aquí</a>
       </div>
       <div class="mapa">
-        <iframe src="https://www.google.com/maps?q=Hospital+Angeles+Metropolitano+Tlacotalpan+59+Roma+Sur+Ciudad+de+Mexico&output=embed" title="Hospital Ángeles Metropolitano"></iframe>
+        <div class="mapa-placeholder" onclick="loadMap(this, 'https://www.google.com/maps?q=Hospital+Angeles+Metropolitano+Tlacotalpan+59+Roma+Sur+Ciudad+de+Mexico&output=embed', 'Hospital Ángeles Metropolitano')"
+          style="width:100%;height:350px;border-radius:15px;background:#e8f0fe;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:12px;">
+          <div style="font-size:40px;">🗺️</div>
+          <div style="font-weight:600;color:#1976d2;font-size:15px;">Ver en Google Maps</div>
+          <div style="font-size:12px;color:#888;">Toca para cargar el mapa</div>
+        </div>
       </div>
     </div>
   </div>
@@ -599,6 +611,15 @@ function toggleInfo(id){
   body.classList.toggle("open");
   arrow.style.transform = body.classList.contains("open") ? "rotate(180deg)" : "rotate(0deg)";
 }
+function loadMap(el, src, title){
+  var iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.title = title;
+  iframe.style = 'width:100%;height:350px;border-radius:15px;border:0;';
+  iframe.allowFullscreen = true;
+  el.parentNode.replaceChild(iframe, el);
+}
+
 function scrollCarrusel(dir){
   var c = document.getElementById('videoCarrusel');
   c.scrollBy({ left: dir * 310, behavior: 'smooth' });
