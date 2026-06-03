@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoja de Referencia - Dr. Del Moral Carachure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+  font-family:'Jost', sans-serif;
+  background:#e8edf5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 20px 60px;
+  gap:30px;
+}
+
+.hoja{
+  width:216mm;
+  min-height:279mm;
+  background:white;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  border-radius:4px;
+}
+
+/* ── BARRA SUPERIOR ── */
+.top-bar{
+  background:linear-gradient(135deg,#1565c0,#42a5f5);
+  padding:18px 36px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.top-bar::after{
+  content:""; position:absolute;
+  bottom:-30px; right:-30px;
+  width:160px; height:160px;
+  border-radius:50%; background:rgba(255,255,255,0.07);
+}
+.top-bar::before{
+  content:""; position:absolute;
+  top:-40px; left:220px;
+  width:200px; height:200px;
+  border-radius:50%; background:rgba(255,255,255,0.05);
+}
+.bar-left{ display:flex; align-items:center; gap:18px; position:relative; z-index:1; }
+.bar-logo{ width:62px; height:62px; border-radius:12px; object-fit:cover; border:2px solid rgba(255,255,255,0.35); box-shadow:0 4px 20px rgba(0,0,0,0.25); }
+.bar-dr{ font-size:10px; color:rgba(255,255,255,0.7); letter-spacing:3px; text-transform:uppercase; }
+.bar-name{ font-family:'Cormorant Garamond'; font-size:28px; font-weight:600; color:white; line-height:1.0; letter-spacing:-0.3px; }
+.bar-specialty{ font-size:9px; color:rgba(255,255,255,0.65); letter-spacing:2.5px; text-transform:uppercase; margin-top:4px; }
+.bar-center{ position:relative; z-index:1; text-align:center; }
+.bar-doc-type{
+  font-family:'Cormorant Garamond';
+  font-size:18px; font-weight:400;
+  color:rgba(255,255,255,0.9);
+  letter-spacing:4px; text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.3);
+  padding:6px 18px; border-radius:3px;
+}
+.bar-right{ text-align:right; position:relative; z-index:1; }
+.bar-cedula{ font-size:9.5px; color:rgba(255,255,255,0.7); letter-spacing:0.5px; line-height:2; }
+.bar-cedula strong{ color:white; font-weight:600; }
+
+/* ── HOSPITALES ── */
+.hosp-strip{
+  background:#f0f6ff; border-bottom:1px solid #dce8f8;
+  padding:7px 36px; display:flex; gap:36px; align-items:center; flex-shrink:0;
+}
+.hosp-item{ display:flex; align-items:center; gap:7px; }
+.hosp-dot{ width:6px; height:6px; border-radius:50%; background:#42a5f5; flex-shrink:0; }
+.hosp-name{ font-size:10px; font-weight:600; color:#0d47a1; }
+.hosp-addr{ font-size:8.5px; color:#888; margin-left:4px; }
+.hosp-div{ width:1px; height:22px; background:#cde; }
+
+/* ── ID BAR ── */
+.id-bar{
+  background:#f8fbff; border-bottom:1px solid #e8f0fe;
+  padding:8px 36px; display:flex; align-items:center; gap:24px; flex-shrink:0; flex-wrap:wrap;
+}
+.id-field{ display:flex; align-items:center; gap:8px; }
+.id-label{ font-size:7.5px; font-weight:600; color:#42a5f5; letter-spacing:2px; text-transform:uppercase; white-space:nowrap; }
+.id-input{
+  border:none; border-bottom:1.5px solid #dce8f8;
+  background:transparent; font-family:'Jost'; font-size:12px;
+  color:#333; padding:2px 6px; outline:none;
+}
+.id-input:focus{ border-bottom-color:#42a5f5; }
+.id-select{
+  border:none; border-bottom:1.5px solid #dce8f8;
+  background:transparent; font-family:'Jost'; font-size:12px;
+  color:#333; padding:2px 4px; outline:none; cursor:pointer;
+}
+
+/* ── BODY ── */
+.body{ flex:1; padding:16px 36px 14px; display:flex; flex-direction:column; gap:14px; }
+
+.section{ display:flex; flex-direction:column; gap:8px; }
+.section-title{
+  font-size:8px; font-weight:600; color:#1565c0;
+  letter-spacing:2.5px; text-transform:uppercase;
+  padding-bottom:4px; border-bottom:1.5px solid #42a5f5;
+  display:flex; align-items:center; gap:6px;
+}
+
+.field{ display:flex; flex-direction:column; gap:4px; }
+.field-label{ font-size:7.5px; font-weight:600; color:#42a5f5; letter-spacing:1.8px; text-transform:uppercase; }
+.field-line{
+  border:none; border-bottom:1px solid #dce8f8;
+  background:transparent; color:#333;
+  font-family:'Jost'; font-size:12px;
+  padding:4px 0; outline:none; width:100%;
+  transition:border-color 0.2s;
+}
+.field-line:focus{ border-bottom-color:#42a5f5; }
+.field-select{
+  border:none; border-bottom:1px solid #dce8f8;
+  background:transparent; font-family:'Jost'; font-size:12px;
+  color:#333; padding:4px 0; outline:none; width:100%; cursor:pointer;
+}
+.field-select:focus{ border-bottom-color:#42a5f5; }
+
+.grid-5{ display:grid; grid-template-columns:2fr 1fr 70px 70px 70px; gap:14px; align-items:end; }
+.grid-4{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:14px; align-items:end; }
+.grid-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; align-items:end; }
+.grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:end; }
+.grid-2-1{ display:grid; grid-template-columns:2fr 1fr; gap:14px; align-items:end; }
+.grid-3-1{ display:grid; grid-template-columns:3fr 1fr; gap:14px; align-items:end; }
+
+.write-input{
+  border:none; border-bottom:1px solid #e8f0fe;
+  background:transparent; font-family:'Jost'; font-size:12px;
+  color:#333; height:26px; outline:none; width:100%; padding:0 2px;
+}
+.write-input:focus{ border-bottom-color:#42a5f5; }
+
+.check-group{ display:flex; flex-wrap:wrap; gap:7px 18px; }
+.check-item{ display:flex; align-items:center; gap:5px; font-size:11px; color:#444; }
+.check-item input[type=checkbox]{ accent-color:#1565c0; width:13px; height:13px; }
+
+/* Tabla signos vitales */
+.sv-table{ width:100%; border-collapse:collapse; font-size:11px; }
+.sv-table th{
+  background:#e8f0fe; color:#1565c0;
+  font-size:7.5px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+  padding:6px 8px; text-align:left; border:1px solid #dce8f8;
+}
+.sv-table td{ border:1px solid #e8f0fe; padding:3px 8px; vertical-align:middle; }
+.sv-table td input{
+  border:none; outline:none; width:100%;
+  font-family:'Jost'; font-size:11px; color:#333; background:transparent; padding:2px 0;
+}
+
+/* Recuadro de destino con borde decorativo */
+.destino-box{
+  border:1px solid #dce8f8;
+  border-left:4px solid #1565c0;
+  border-radius:4px;
+  padding:12px 16px;
+  background:#f8fbff;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.destino-title{
+  font-size:9px; font-weight:600; color:#1565c0;
+  letter-spacing:2px; text-transform:uppercase;
+}
+
+/* Recuadro de respuesta */
+.resp-box{
+  border:1px solid #dce8f8;
+  border-left:4px solid #42a5f5;
+  border-radius:4px;
+  padding:12px 16px;
+  background:#fafcff;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:2px;
+}
+.resp-title{
+  font-size:9px; font-weight:600; color:#42a5f5;
+  letter-spacing:2px; text-transform:uppercase;
+}
+
+/* Urgencia badge */
+.urg-group{ display:flex; gap:8px; flex-wrap:wrap; }
+.urg-btn{
+  padding:5px 14px; border-radius:99px;
+  border:1px solid #dce8f8; background:#f8fbff;
+  font-family:'Jost'; font-size:11px; font-weight:500;
+  color:#aaa; cursor:pointer; transition:all 0.15s;
+}
+.urg-btn:hover{ border-color:#42a5f5; color:#1565c0; background:#e8f0fe; }
+.urg-btn.urg-electiva{ background:#1565c0; color:white; border-color:#1565c0; }
+.urg-btn.urg-urgente{ background:#f57c00; color:white; border-color:#f57c00; }
+.urg-btn.urg-emergencia{ background:#c62828; color:white; border-color:#c62828; }
+
+/* ── FOOTER ── */
+.footer{
+  border-top:1px solid #e8f0fe; padding:10px 36px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-shrink:0; background:#fafcff;
+}
+.firma-block{ display:flex; flex-direction:column; align-items:center; gap:5px; }
+.firma-line{ width:140px; border-bottom:1px solid #ccc; height:36px; }
+.firma-label{ font-size:7.5px; color:#aaa; letter-spacing:1.5px; text-transform:uppercase; }
+.sello-block{ display:flex; flex-direction:column; align-items:center; gap:5px; }
+.sello-circle{ width:60px; height:60px; border:1px dashed #ccc; border-radius:50%; }
+.sello-label{ font-size:7.5px; color:#aaa; letter-spacing:1px; text-transform:uppercase; }
+.footer-contact{ text-align:right; }
+.footer-tel{ font-size:15px; font-weight:600; color:#0d47a1; }
+.footer-web{ font-size:9px; color:#42a5f5; margin-top:2px; }
+.footer-note{ font-size:7px; color:#bbb; margin-top:6px; line-height:1.6; }
+
+/* ── BOTONES ── */
+.print-btn{
+  background:linear-gradient(135deg,#1565c0,#42a5f5);
+  color:white; border:none; padding:14px 38px; border-radius:50px;
+  font-family:'Jost',sans-serif; font-size:12px; font-weight:600;
+  cursor:pointer; letter-spacing:3px; text-transform:uppercase;
+  transition:all 0.2s; box-shadow:0 8px 25px rgba(21,101,192,0.35);
+}
+.print-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 35px rgba(21,101,192,0.45); }
+.print-note{ font-size:11px; color:#888; text-align:center; background:white; padding:12px 24px; border-radius:8px; max-width:500px; line-height:1.6; }
+
+@media print{
+  @page{ size:letter portrait; margin:0; }
+  body{ background:white; padding:0; gap:0; }
+  .print-btn, .print-note{ display:none; }
+  .hoja{ box-shadow:none; border-radius:0; width:216mm; }
+  .top-bar, .hosp-strip, .sv-table th{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .urg-btn.urg-electiva, .urg-btn.urg-urgente, .urg-btn.urg-emergencia{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .destino-box, .resp-box{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="hoja">
+
+  <!-- BARRA SUPERIOR -->
+  <div class="top-bar">
+    <div class="bar-left">
+      <img src="logo.jpeg" class="bar-logo" alt="Logo">
+      <div>
+        <div class="bar-dr">Dr.</div>
+        <div class="bar-name">Del Moral Carachure</div>
+        <div class="bar-specialty">Traumatología · Ortopedia · Cirugía Artroscópica</div>
+      </div>
+    </div>
+    <div class="bar-center">
+      <div class="bar-doc-type">Hoja de Referencia</div>
+    </div>
+    <div class="bar-right">
+      <div class="bar-cedula">Cédula Prof. <strong>12818525</strong></div>
+      <div class="bar-cedula">Esp. Ortopedia <strong>UNAM</strong></div>
+      <div class="bar-cedula">Alta Esp. Artroscopia <strong>UNAM</strong></div>
+    </div>
+  </div>
+
+  <!-- HOSPITALES -->
+  <div class="hosp-strip">
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Hospital MAC La Viga</div>
+      <div class="hosp-addr">Calzada La Viga #1174, Consultorio 725</div>
+    </div>
+    <div class="hosp-div"></div>
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Ángeles Metropolitano</div>
+      <div class="hosp-addr">Tlacotalpan 59, Consultorio 425, Torre Diamante, Roma Sur</div>
+    </div>
+  </div>
+
+  <!-- ID BAR -->
+  <div class="id-bar">
+    <div class="id-field" style="flex:2;">
+      <div class="id-label">Paciente</div>
+      <input class="id-input" type="text" style="width:200px;">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Fecha nacimiento</div>
+      <input class="id-input" type="text" style="width:90px;">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Edad</div>
+      <input class="id-input" type="text" style="width:40px; text-align:center;">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Sexo</div>
+      <select class="id-select">
+        <option value="">—</option>
+        <option>Masculino</option>
+        <option>Femenino</option>
+      </select>
+    </div>
+    <div class="id-field">
+      <div class="id-label">Fecha</div>
+      <input class="id-input" type="text" style="width:90px;">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Expediente</div>
+      <input class="id-input" type="text" style="width:80px;">
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- 1. DATOS DEL PACIENTE -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+        Datos del Paciente
+      </div>
+      <div class="grid-4">
+        <div class="field">
+          <div class="field-label">Ocupación</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Teléfono</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Derechohabiente</div>
+          <select class="field-select">
+            <option value=""></option>
+            <option>IMSS</option>
+            <option>ISSSTE</option>
+            <option>Seguro privado</option>
+            <option>Particular</option>
+          </select>
+        </div>
+        <div class="field">
+          <div class="field-label">Aseguradora / N° póliza</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MOTIVO DE REFERENCIA -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Motivo de Referencia
+      </div>
+      <div class="grid-3-1">
+        <div class="field">
+          <div class="field-label">Diagnóstico / Motivo de envío</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">CIE-10</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Resumen clínico</div>
+        <input class="write-input" type="text">
+        <input class="write-input" type="text">
+        <input class="write-input" type="text">
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <div class="field-label">Tiempo de evolución</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Zona afectada</div>
+          <select class="field-select">
+            <option value=""></option>
+            <option>Hombro derecho</option>
+            <option>Hombro izquierdo</option>
+            <option>Rodilla derecha</option>
+            <option>Rodilla izquierda</option>
+            <option>Cadera derecha</option>
+            <option>Cadera izquierda</option>
+            <option>Columna cervical</option>
+            <option>Columna lumbar</option>
+            <option>Codo derecho</option>
+            <option>Codo izquierdo</option>
+            <option>Tobillo derecho</option>
+            <option>Tobillo izquierdo</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <div class="field-label">Tipo de referencia</div>
+          <div class="urg-group" id="urgencia" style="margin-top:4px;">
+            <button class="urg-btn" onclick="selUrg(this,'electiva')">Electiva</button>
+            <button class="urg-btn" onclick="selUrg(this,'urgente')">Urgente</button>
+            <button class="urg-btn" onclick="selUrg(this,'emergencia')">Emergencia</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ANTECEDENTES RELEVANTES -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        Antecedentes Relevantes
+      </div>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox"> Diabetes</label>
+        <label class="check-item"><input type="checkbox"> Hipertensión</label>
+        <label class="check-item"><input type="checkbox"> Cardiopatía</label>
+        <label class="check-item"><input type="checkbox"> Artritis/Artrosis</label>
+        <label class="check-item"><input type="checkbox"> Osteoporosis</label>
+        <label class="check-item"><input type="checkbox"> Coagulopatía</label>
+        <label class="check-item"><input type="checkbox"> Alergias</label>
+        <label class="check-item"><input type="checkbox"> Cirugías previas</label>
+        <label class="check-item"><input type="checkbox"> Fracturas previas</label>
+        <label class="check-item"><input type="checkbox"> Tabaquismo</label>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <div class="field-label">Medicamentos actuales</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Alergias a medicamentos</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SIGNOS VITALES -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        Signos Vitales al Momento de la Referencia
+      </div>
+      <table class="sv-table">
+        <tr>
+          <th>T/A (mmHg)</th>
+          <th>FC (lpm)</th>
+          <th>FR (rpm)</th>
+          <th>Temp. (°C)</th>
+          <th>SpO2 (%)</th>
+          <th>Peso (kg)</th>
+          <th>Talla (cm)</th>
+        </tr>
+        <tr>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 5. ESTUDIOS ENVIADOS -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        Estudios que se Envían
+      </div>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox"> Radiografías</label>
+        <label class="check-item"><input type="checkbox"> Resonancia magnética</label>
+        <label class="check-item"><input type="checkbox"> Ultrasonido</label>
+        <label class="check-item"><input type="checkbox"> TAC</label>
+        <label class="check-item"><input type="checkbox"> Laboratorios</label>
+        <label class="check-item"><input type="checkbox"> Electromiografía</label>
+        <label class="check-item"><input type="checkbox"> Reporte de cirugía previa</label>
+        <label class="check-item"><input type="checkbox"> Notas previas</label>
+      </div>
+      <div class="field">
+        <div class="field-label">Descripción / Hallazgos relevantes de los estudios</div>
+        <input class="write-input" type="text">
+        <input class="write-input" type="text">
+      </div>
+    </div>
+
+    <!-- 6. MÉDICO REFERENTE + DESTINO -->
+    <div class="grid-2" style="align-items:start; gap:14px;">
+
+      <!-- Médico referente -->
+      <div class="destino-box">
+        <div class="destino-title">Médico Referente</div>
+        <div class="field">
+          <div class="field-label">Nombre</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <div class="field-label">Especialidad</div>
+            <input class="field-line" type="text">
+          </div>
+          <div class="field">
+            <div class="field-label">Cédula profesional</div>
+            <input class="field-line" type="text">
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <div class="field-label">Institución / Consultorio</div>
+            <input class="field-line" type="text">
+          </div>
+          <div class="field">
+            <div class="field-label">Teléfono de contacto</div>
+            <input class="field-line" type="text">
+          </div>
+        </div>
+      </div>
+
+      <!-- Destino de la referencia -->
+      <div class="destino-box" style="border-left-color:#42a5f5;">
+        <div class="destino-title" style="color:#1565c0;">Referido a</div>
+        <div class="field">
+          <div class="field-label">Especialista / Servicio</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Hospital / Institución</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <div class="field-label">Objetivo de la referencia</div>
+            <select class="field-select">
+              <option value=""></option>
+              <option>Valoración y manejo</option>
+              <option>Valoración preanestésica</option>
+              <option>Interconsulta</option>
+              <option>Procedimiento quirúrgico</option>
+              <option>Segunda opinión</option>
+              <option>Rehabilitación</option>
+              <option>Urgencia</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="field-label">Cita programada</div>
+            <input class="field-line" type="text">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 7. ESPACIO PARA RESPUESTA (contrareferencia) -->
+    <div class="resp-box">
+      <div class="resp-title">Contrarreferencia — Para uso del especialista receptor</div>
+      <div class="grid-2-1">
+        <div class="field">
+          <div class="field-label">Diagnóstico confirmado / Impresión</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">CIE-10</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Plan / Indicaciones al médico referente</div>
+        <input class="write-input" type="text">
+        <input class="write-input" type="text">
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <div class="field-label">Fecha de atención</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Nombre del especialista receptor</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Firma / Sello</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="firma-block">
+      <div class="firma-line"></div>
+      <div class="firma-label">Firma del Médico</div>
+    </div>
+    <div class="sello-block">
+      <div class="sello-circle"></div>
+      <div class="sello-label">Sello</div>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-tel">55 3410 8562</div>
+      <div class="footer-web">ortopediadelmoral.com.mx</div>
+      <div class="footer-note">Hoja de Referencia · Ciudad de México</div>
+    </div>
+  </div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+<p class="print-note">Imprime en <strong>tamaño carta</strong>.<br>Activa "Gráficos de fondo" para que salga la barra azul.</p>
+
+<script>
+function selUrg(btn, tipo) {
+  document.querySelectorAll('#urgencia .urg-btn').forEach(b =>
+    b.classList.remove('urg-electiva','urg-urgente','urg-emergencia')
+  );
+  btn.classList.add('urg-' + tipo);
+}
+</script>
+
+</body>
+</html>
