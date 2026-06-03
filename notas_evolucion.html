@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notas de Evolución - Dr. Del Moral Carachure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+  font-family:'Jost', sans-serif;
+  background:#e8edf5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 20px 60px;
+  gap:30px;
+}
+
+/* ── HOJA CARTA ── */
+.hoja{
+  width:216mm;
+  min-height:279mm;
+  background:white;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  border-radius:4px;
+  page-break-after:always;
+}
+
+/* ── BARRA SUPERIOR ── */
+.top-bar{
+  background:linear-gradient(135deg,#1565c0,#42a5f5);
+  padding:18px 36px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.top-bar::after{
+  content:"";
+  position:absolute;
+  bottom:-30px; right:-30px;
+  width:160px; height:160px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.07);
+}
+.top-bar::before{
+  content:"";
+  position:absolute;
+  top:-40px; left:220px;
+  width:200px; height:200px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+.bar-left{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  position:relative;
+  z-index:1;
+}
+.bar-logo{
+  width:62px; height:62px;
+  border-radius:12px;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.35);
+  box-shadow:0 4px 20px rgba(0,0,0,0.25);
+}
+.bar-dr{ font-size:10px; color:rgba(255,255,255,0.7); letter-spacing:3px; text-transform:uppercase; }
+.bar-name{ font-family:'Cormorant Garamond'; font-size:28px; font-weight:600; color:white; line-height:1.0; letter-spacing:-0.3px; }
+.bar-specialty{ font-size:9px; color:rgba(255,255,255,0.65); letter-spacing:2.5px; text-transform:uppercase; margin-top:4px; }
+.bar-center{ position:relative; z-index:1; text-align:center; }
+.bar-doc-type{
+  font-family:'Cormorant Garamond';
+  font-size:18px; font-weight:400;
+  color:rgba(255,255,255,0.9);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.3);
+  padding:6px 18px;
+  border-radius:3px;
+}
+.bar-right{ text-align:right; position:relative; z-index:1; }
+.bar-cedula{ font-size:9.5px; color:rgba(255,255,255,0.7); letter-spacing:0.5px; line-height:2; }
+.bar-cedula strong{ color:white; font-weight:600; }
+
+/* ── HOSPITALES ── */
+.hosp-strip{
+  background:#f0f6ff;
+  border-bottom:1px solid #dce8f8;
+  padding:7px 36px;
+  display:flex;
+  gap:36px;
+  align-items:center;
+  flex-shrink:0;
+}
+.hosp-item{ display:flex; align-items:center; gap:7px; }
+.hosp-dot{ width:6px; height:6px; border-radius:50%; background:#42a5f5; flex-shrink:0; }
+.hosp-name{ font-size:10px; font-weight:600; color:#0d47a1; }
+.hosp-addr{ font-size:8.5px; color:#888; margin-left:4px; }
+.hosp-div{ width:1px; height:22px; background:#cde; }
+
+/* ── BARRA DE IDENTIFICACIÓN ── */
+.id-bar{
+  background:#f8fbff;
+  border-bottom:1px solid #e8f0fe;
+  padding:8px 36px;
+  display:flex;
+  align-items:center;
+  gap:28px;
+  flex-shrink:0;
+}
+.id-field{ display:flex; align-items:center; gap:8px; flex:1; }
+.id-field.short{ flex:0 0 auto; }
+.id-label{ font-size:7.5px; font-weight:600; color:#42a5f5; letter-spacing:2px; text-transform:uppercase; white-space:nowrap; }
+.id-input{
+  border:none; border-bottom:1.5px solid #dce8f8;
+  background:transparent; font-family:'Jost'; font-size:12px;
+  color:#333; padding:2px 6px; outline:none; width:100%;
+}
+.id-input:focus{ border-bottom-color:#42a5f5; }
+.id-select{
+  border:none; border-bottom:1.5px solid #dce8f8;
+  background:transparent; font-family:'Jost'; font-size:12px;
+  color:#333; padding:2px 4px; outline:none; cursor:pointer;
+}
+.id-select:focus{ border-bottom-color:#42a5f5; }
+
+/* ── NÚMERO DE NOTA ── */
+.num-nota-badge{
+  background:linear-gradient(135deg,#1565c0,#42a5f5);
+  color:white;
+  font-size:10px; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:4px 14px;
+  border-radius:99px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+/* ── BODY ── */
+.body{ flex:1; padding:16px 36px 14px; display:flex; flex-direction:column; gap:12px; }
+
+/* Secciones */
+.section{ display:flex; flex-direction:column; gap:7px; }
+.section-title{
+  font-size:8px; font-weight:600; color:#1565c0;
+  letter-spacing:2.5px; text-transform:uppercase;
+  padding-bottom:4px;
+  border-bottom:1.5px solid #42a5f5;
+  display:flex; align-items:center; gap:6px;
+}
+
+/* Campos */
+.field{ display:flex; flex-direction:column; gap:4px; }
+.field-label{ font-size:7.5px; font-weight:600; color:#42a5f5; letter-spacing:1.8px; text-transform:uppercase; }
+.field-line{
+  border:none; border-bottom:1px solid #dce8f8;
+  background:transparent; color:#333;
+  font-family:'Jost'; font-size:12px;
+  padding:4px 0; outline:none; width:100%;
+  transition:border-color 0.2s;
+}
+.field-line:focus{ border-bottom-color:#42a5f5; }
+
+/* Grids */
+.grid-5{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:14px; align-items:end; }
+.grid-4{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:14px; align-items:end; }
+.grid-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; align-items:end; }
+.grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:end; }
+.grid-2-1{ display:grid; grid-template-columns:2fr 1fr; gap:14px; align-items:end; }
+.grid-3-1{ display:grid; grid-template-columns:3fr 1fr; gap:14px; align-items:end; }
+
+/* Líneas de escritura */
+.write-input{
+  border:none; border-bottom:1px solid #e8f0fe;
+  background:transparent; font-family:'Jost'; font-size:12px;
+  color:#333; height:26px; outline:none; width:100%;
+  padding:0 2px;
+}
+.write-input:focus{ border-bottom-color:#42a5f5; }
+
+/* Checkboxes */
+.check-group{ display:flex; flex-wrap:wrap; gap:7px 18px; }
+.check-item{ display:flex; align-items:center; gap:5px; font-size:11px; color:#444; }
+.check-item input[type=checkbox]{ accent-color:#1565c0; width:13px; height:13px; }
+
+/* EVA */
+.eva-row{ display:flex; align-items:center; gap:10px; }
+.eva-label{ font-size:10px; color:#888; min-width:60px; }
+.eva-scale{ display:flex; gap:3px; flex:1; }
+.eva-btn{
+  flex:1; height:26px; border:1px solid #dce8f8;
+  background:#f8fbff; border-radius:3px;
+  font-size:10px; font-weight:600; color:#aaa;
+  cursor:pointer; transition:all 0.15s;
+  font-family:'Jost';
+}
+.eva-btn:hover{ background:#e8f0fe; color:#1565c0; border-color:#42a5f5; }
+.eva-btn.selected{ background:#1565c0; color:white; border-color:#1565c0; }
+
+/* Tabla de signos vitales */
+.sv-table{ width:100%; border-collapse:collapse; font-size:11px; }
+.sv-table th{
+  background:#e8f0fe; color:#1565c0;
+  font-size:7.5px; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:6px 8px; text-align:left;
+  border:1px solid #dce8f8;
+}
+.sv-table td{
+  border:1px solid #e8f0fe;
+  padding:3px 8px; vertical-align:middle;
+}
+.sv-table td input{
+  border:none; outline:none; width:100%;
+  font-family:'Jost'; font-size:11px; color:#333;
+  background:transparent; padding:2px 0;
+}
+
+/* Escala de mejora */
+.mejora-scale{
+  display:flex; gap:4px; margin-top:4px;
+}
+.mejora-btn{
+  flex:1; padding:6px 2px;
+  border:1px solid #dce8f8;
+  background:#f8fbff;
+  border-radius:3px;
+  font-size:10px; font-weight:500;
+  color:#aaa; cursor:pointer;
+  font-family:'Jost'; text-align:center;
+  transition:all 0.15s;
+  line-height:1.3;
+}
+.mejora-btn:hover{ background:#e8f0fe; color:#1565c0; border-color:#42a5f5; }
+.mejora-btn.sel-mej{ background:#2e7d32; color:white; border-color:#2e7d32; }
+.mejora-btn.sel-igual{ background:#f57c00; color:white; border-color:#f57c00; }
+.mejora-btn.sel-peor{ background:#c62828; color:white; border-color:#c62828; }
+
+/* Tabla movilidad */
+.mov-table{ width:100%; border-collapse:collapse; font-size:11px; }
+.mov-table th{
+  background:#e8f0fe; color:#1565c0;
+  font-size:7.5px; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:5px 8px; border:1px solid #dce8f8;
+}
+.mov-table td{
+  border:1px solid #e8f0fe;
+  padding:2px 8px; vertical-align:middle;
+}
+.mov-table td input{
+  border:none; outline:none; width:100%;
+  font-family:'Jost'; font-size:11px; color:#333;
+  background:transparent; padding:2px 0;
+}
+.mov-table .td-lbl{
+  font-size:9px; color:#888; font-weight:500;
+  background:#fafcff; width:110px;
+}
+
+/* Indicadores adherencia */
+.adh-group{ display:flex; gap:12px; flex-wrap:wrap; }
+.adh-item{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.adh-label{ font-size:9px; color:#888; text-align:center; }
+.adh-opts{ display:flex; gap:4px; }
+.adh-opt{
+  font-size:10px; padding:3px 10px;
+  border:1px solid #dce8f8; border-radius:99px;
+  background:#f8fbff; color:#aaa;
+  cursor:pointer; font-family:'Jost';
+  transition:all 0.15s;
+}
+.adh-opt:hover{ border-color:#42a5f5; color:#1565c0; background:#e8f0fe; }
+.adh-opt.adh-si{ background:#1565c0; color:white; border-color:#1565c0; }
+.adh-opt.adh-no{ background:#c62828; color:white; border-color:#c62828; }
+.adh-opt.adh-par{ background:#f57c00; color:white; border-color:#f57c00; }
+
+/* ── FOOTER ── */
+.footer{
+  border-top:1px solid #e8f0fe;
+  padding:10px 36px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-shrink:0;
+  background:#fafcff;
+}
+.firma-block{ display:flex; flex-direction:column; align-items:center; gap:5px; }
+.firma-line{ width:140px; border-bottom:1px solid #ccc; height:36px; }
+.firma-label{ font-size:7.5px; color:#aaa; letter-spacing:1.5px; text-transform:uppercase; }
+.sello-block{ display:flex; flex-direction:column; align-items:center; gap:5px; }
+.sello-circle{ width:60px; height:60px; border:1px dashed #ccc; border-radius:50%; }
+.sello-label{ font-size:7.5px; color:#aaa; letter-spacing:1px; text-transform:uppercase; }
+.footer-contact{ text-align:right; }
+.footer-tel{ font-size:15px; font-weight:600; color:#0d47a1; }
+.footer-web{ font-size:9px; color:#42a5f5; margin-top:2px; }
+.footer-note{ font-size:7px; color:#bbb; margin-top:6px; line-height:1.6; }
+
+/* Separador ligero */
+.sep{ height:1px; background:#f0f6ff; margin:2px 0; }
+
+/* ── BOTONES ── */
+.print-btn{
+  background:linear-gradient(135deg,#1565c0,#42a5f5);
+  color:white; border:none;
+  padding:14px 38px; border-radius:50px;
+  font-family:'Jost',sans-serif; font-size:12px;
+  font-weight:600; cursor:pointer;
+  letter-spacing:3px; text-transform:uppercase;
+  transition:all 0.2s;
+  box-shadow:0 8px 25px rgba(21,101,192,0.35);
+}
+.print-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 35px rgba(21,101,192,0.45); }
+.print-note{ font-size:11px; color:#888; text-align:center; background:white; padding:12px 24px; border-radius:8px; max-width:500px; line-height:1.6; }
+
+/* ── IMPRESIÓN ── */
+@media print{
+  @page{ size:letter portrait; margin:0; }
+  body{ background:white; padding:0; gap:0; }
+  .print-btn, .print-note, .page-controls{ display:none; }
+  .hoja{ box-shadow:none; border-radius:0; width:216mm; page-break-after:always; }
+  .eva-btn.selected, .mejora-btn.sel-mej, .mejora-btn.sel-igual, .mejora-btn.sel-peor,
+  .adh-opt.adh-si, .adh-opt.adh-no, .adh-opt.adh-par{
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .top-bar{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .hosp-strip, .sv-table th, .mov-table th{
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     NOTA DE EVOLUCIÓN
+     ══════════════════════════════════ -->
+<div class="hoja" id="hoja-nota">
+
+  <!-- BARRA SUPERIOR -->
+  <div class="top-bar">
+    <div class="bar-left">
+      <img src="logo.jpeg" class="bar-logo" alt="Logo">
+      <div>
+        <div class="bar-dr">Dr.</div>
+        <div class="bar-name">Del Moral Carachure</div>
+        <div class="bar-specialty">Traumatología · Ortopedia · Cirugía Artroscópica</div>
+      </div>
+    </div>
+    <div class="bar-center">
+      <div class="bar-doc-type">Nota de Evolución</div>
+    </div>
+    <div class="bar-right">
+      <div class="bar-cedula">Cédula Prof. <strong>12818525</strong></div>
+      <div class="bar-cedula">Esp. Ortopedia <strong>UNAM</strong></div>
+      <div class="bar-cedula">Alta Esp. Artroscopia <strong>UNAM</strong></div>
+    </div>
+  </div>
+
+  <!-- HOSPITALES -->
+  <div class="hosp-strip">
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Hospital MAC La Viga</div>
+      <div class="hosp-addr">Calzada La Viga #1174, Consultorio 725</div>
+    </div>
+    <div class="hosp-div"></div>
+    <div class="hosp-item">
+      <div class="hosp-dot"></div>
+      <div class="hosp-name">Ángeles Metropolitano</div>
+      <div class="hosp-addr">Tlacotalpan 59, Consultorio 425, Torre Diamante, Roma Sur</div>
+    </div>
+  </div>
+
+  <!-- IDENTIFICACIÓN DEL PACIENTE -->
+  <div class="id-bar">
+    <div class="id-field" style="flex:2;">
+      <div class="id-label">Paciente</div>
+      <input class="id-input" type="text">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Expediente</div>
+      <input class="id-input" type="text" style="width:90px;">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Fecha</div>
+      <input class="id-input" type="text" style="width:100px;">
+    </div>
+    <div class="id-field">
+      <div class="id-label">Consultorio</div>
+      <select class="id-select">
+        <option value="">— —</option>
+        <option>MAC La Viga</option>
+        <option>Ángeles Metropolitano</option>
+      </select>
+    </div>
+    <div class="id-field short">
+      <div class="id-label">Nota N°</div>
+      <input class="id-input" type="text" style="width:50px; text-align:center;">
+    </div>
+    <div class="id-field short">
+      <div class="id-label">Días postquirúrgico</div>
+      <input class="id-input" type="text" style="width:60px; text-align:center;">
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- 1. DIAGNÓSTICO DE BASE -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Diagnóstico de Base / Procedimiento Previo
+      </div>
+      <div class="grid-3-1">
+        <div class="field">
+          <div class="field-label">Diagnóstico / Procedimiento realizado</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Zona afectada</div>
+          <select class="field-line" style="cursor:pointer; font-family:'Jost'; font-size:12px;">
+            <option value=""></option>
+            <option>Hombro derecho</option>
+            <option>Hombro izquierdo</option>
+            <option>Rodilla derecha</option>
+            <option>Rodilla izquierda</option>
+            <option>Cadera derecha</option>
+            <option>Cadera izquierda</option>
+            <option>Columna cervical</option>
+            <option>Columna lumbar</option>
+            <option>Codo derecho</option>
+            <option>Codo izquierdo</option>
+            <option>Tobillo derecho</option>
+            <option>Tobillo izquierdo</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. INTERROGATORIO SUBJETIVO -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        Interrogatorio — Subjetivo (S)
+      </div>
+
+      <!-- Evolución general y EVA -->
+      <div class="grid-2" style="align-items:start;">
+        <div>
+          <div class="field-label" style="margin-bottom:6px;">Referencia del paciente</div>
+          <input class="write-input" type="text" placeholder="">
+          <input class="write-input" type="text" placeholder="">
+          <input class="write-input" type="text" placeholder="">
+        </div>
+        <div>
+          <div class="field-label" style="margin-bottom:6px;">Escala EVA de Dolor</div>
+          <div class="eva-row">
+            <div class="eva-label" style="font-size:9px;">Sin dolor</div>
+            <div class="eva-scale" id="eva">
+              <button class="eva-btn" onclick="selectEva(this,1)">1</button>
+              <button class="eva-btn" onclick="selectEva(this,2)">2</button>
+              <button class="eva-btn" onclick="selectEva(this,3)">3</button>
+              <button class="eva-btn" onclick="selectEva(this,4)">4</button>
+              <button class="eva-btn" onclick="selectEva(this,5)">5</button>
+              <button class="eva-btn" onclick="selectEva(this,6)">6</button>
+              <button class="eva-btn" onclick="selectEva(this,7)">7</button>
+              <button class="eva-btn" onclick="selectEva(this,8)">8</button>
+              <button class="eva-btn" onclick="selectEva(this,9)">9</button>
+              <button class="eva-btn" onclick="selectEva(this,10)">10</button>
+            </div>
+            <div class="eva-label" style="text-align:right; font-size:9px;">Máx.</div>
+          </div>
+
+          <!-- Evolución comparativa -->
+          <div class="field-label" style="margin-top:10px; margin-bottom:5px;">Evolución comparativa con consulta previa</div>
+          <div class="mejora-scale" id="mejora">
+            <button class="mejora-btn" onclick="selMejora(this,'mej')">↑ Mejoría</button>
+            <button class="mejora-btn" onclick="selMejora(this,'mej')">↑ Mucho mejor</button>
+            <button class="mejora-btn" onclick="selMejora(this,'igual')">= Sin cambio</button>
+            <button class="mejora-btn" onclick="selMejora(this,'peor')">↓ Peor</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Síntomas actuales -->
+      <div class="field-label" style="margin-top:4px;">Síntomas actuales</div>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox"> Dolor en reposo</label>
+        <label class="check-item"><input type="checkbox"> Dolor al movimiento</label>
+        <label class="check-item"><input type="checkbox"> Dolor nocturno</label>
+        <label class="check-item"><input type="checkbox"> Inflamación</label>
+        <label class="check-item"><input type="checkbox"> Rigidez matutina</label>
+        <label class="check-item"><input type="checkbox"> Crepitación</label>
+        <label class="check-item"><input type="checkbox"> Bloqueo articular</label>
+        <label class="check-item"><input type="checkbox"> Inestabilidad</label>
+        <label class="check-item"><input type="checkbox"> Parestesias</label>
+        <label class="check-item"><input type="checkbox"> Debilidad muscular</label>
+        <label class="check-item"><input type="checkbox"> Fiebre / Signos de infección</label>
+        <label class="check-item"><input type="checkbox"> Asintomático</label>
+      </div>
+    </div>
+
+    <!-- 3. ADHERENCIA AL TRATAMIENTO -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Adherencia al Tratamiento
+      </div>
+      <div class="adh-group">
+        <div class="adh-item">
+          <div class="adh-label">Medicamento indicado</div>
+          <div class="adh-opts">
+            <button class="adh-opt" onclick="selAdh(this,'si')">Sí</button>
+            <button class="adh-opt" onclick="selAdh(this,'par')">Parcial</button>
+            <button class="adh-opt" onclick="selAdh(this,'no')">No</button>
+          </div>
+        </div>
+        <div class="adh-item">
+          <div class="adh-label">Fisioterapia</div>
+          <div class="adh-opts">
+            <button class="adh-opt" onclick="selAdh(this,'si')">Sí</button>
+            <button class="adh-opt" onclick="selAdh(this,'par')">Parcial</button>
+            <button class="adh-opt" onclick="selAdh(this,'no')">No</button>
+            <button class="adh-opt" onclick="selAdh(this,'no')" style="font-size:9px;">N/A</button>
+          </div>
+        </div>
+        <div class="adh-item">
+          <div class="adh-label">Inmovilización / Ortesis</div>
+          <div class="adh-opts">
+            <button class="adh-opt" onclick="selAdh(this,'si')">Sí</button>
+            <button class="adh-opt" onclick="selAdh(this,'par')">Parcial</button>
+            <button class="adh-opt" onclick="selAdh(this,'no')">No</button>
+            <button class="adh-opt" onclick="selAdh(this,'no')" style="font-size:9px;">N/A</button>
+          </div>
+        </div>
+        <div class="adh-item">
+          <div class="adh-label">Restricción de actividad</div>
+          <div class="adh-opts">
+            <button class="adh-opt" onclick="selAdh(this,'si')">Sí</button>
+            <button class="adh-opt" onclick="selAdh(this,'par')">Parcial</button>
+            <button class="adh-opt" onclick="selAdh(this,'no')">No</button>
+          </div>
+        </div>
+        <div class="adh-item">
+          <div class="adh-label">Estudios solicitados</div>
+          <div class="adh-opts">
+            <button class="adh-opt" onclick="selAdh(this,'si')">Entregados</button>
+            <button class="adh-opt" onclick="selAdh(this,'par')">Pendientes</button>
+            <button class="adh-opt" onclick="selAdh(this,'no')" style="font-size:9px;">N/A</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. EXPLORACIÓN FÍSICA OBJETIVA -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
+        Exploración Física — Objetivo (O)
+      </div>
+
+      <!-- Signos vitales -->
+      <div class="field-label" style="margin-bottom:4px;">Signos Vitales</div>
+      <table class="sv-table">
+        <tr>
+          <th>T/A (mmHg)</th>
+          <th>FC (lpm)</th>
+          <th>FR (rpm)</th>
+          <th>Temp. (°C)</th>
+          <th>SpO2 (%)</th>
+          <th>Peso (kg)</th>
+        </tr>
+        <tr>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+      </table>
+
+      <!-- Exploración regional -->
+      <div class="field-label" style="margin-top:8px; margin-bottom:4px;">Exploración Regional</div>
+      <table class="mov-table">
+        <tr>
+          <th style="width:110px;">Hallazgo</th>
+          <th>Inspección</th>
+          <th>Palpación / Dolor</th>
+          <th>Arco de movilidad</th>
+          <th>Pruebas especiales</th>
+        </tr>
+        <tr>
+          <td class="td-lbl">Zona afectada</td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td class="td-lbl">Herida / Cicatriz</td>
+          <td><input type="text" placeholder="Aspecto, bordes"></td>
+          <td><input type="text" placeholder="Sensibilidad"></td>
+          <td><input type="text" placeholder="N/A"></td>
+          <td><input type="text" placeholder="Signos de infección"></td>
+        </tr>
+        <tr>
+          <td class="td-lbl">Fuerza muscular</td>
+          <td><input type="text" placeholder="Comparativa"></td>
+          <td><input type="text"></td>
+          <td><input type="text" placeholder="/5"></td>
+          <td><input type="text"></td>
+        </tr>
+      </table>
+
+      <!-- Hallazgos adicionales -->
+      <div class="field" style="margin-top:4px;">
+        <div class="field-label">Hallazgos adicionales / Observaciones del explorador</div>
+        <input class="write-input" type="text">
+        <input class="write-input" type="text">
+      </div>
+    </div>
+
+    <!-- 5. ESTUDIOS -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        Resultados de Estudios
+      </div>
+      <div class="grid-4">
+        <div class="field">
+          <div class="field-label">Radiografía</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Ultrasonido</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Resonancia magnética</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Laboratorio</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ANÁLISIS + PLAN -->
+    <div class="section">
+      <div class="section-title">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="#1565c0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        Análisis y Plan (A / P)
+      </div>
+
+      <div class="grid-2-1">
+        <div class="field">
+          <div class="field-label">Impresión clínica / Diagnóstico de evolución</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">CIE-10</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+
+      <div class="field-label" style="margin-top:2px;">Indicaciones</div>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox"> Continuar tratamiento</label>
+        <label class="check-item"><input type="checkbox"> Ajuste de medicamento</label>
+        <label class="check-item"><input type="checkbox"> Continuar fisioterapia</label>
+        <label class="check-item"><input type="checkbox"> Iniciar fisioterapia</label>
+        <label class="check-item"><input type="checkbox"> Inmovilización</label>
+        <label class="check-item"><input type="checkbox"> Retiro de inmovilización</label>
+        <label class="check-item"><input type="checkbox"> Carga de peso progresiva</label>
+        <label class="check-item"><input type="checkbox"> Infiltración</label>
+        <label class="check-item"><input type="checkbox"> Nuevos estudios</label>
+        <label class="check-item"><input type="checkbox"> Interconsulta</label>
+        <label class="check-item"><input type="checkbox"> Alta médica</label>
+        <label class="check-item"><input type="checkbox"> Programar cirugía</label>
+      </div>
+
+      <input class="write-input" type="text" placeholder="">
+      <input class="write-input" type="text" placeholder="">
+
+      <div class="grid-4" style="margin-top:4px;">
+        <div class="field">
+          <div class="field-label">Medicamento</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Dosis / Vía</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Duración</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Incapacidad (días)</div>
+          <input class="field-line" type="text">
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:4px;">
+        <div class="field">
+          <div class="field-label">Próxima cita</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">En (semanas/días)</div>
+          <input class="field-line" type="text">
+        </div>
+        <div class="field">
+          <div class="field-label">Pronóstico</div>
+          <select class="field-line" style="cursor:pointer; font-family:'Jost'; font-size:12px;">
+            <option value=""></option>
+            <option>Favorable</option>
+            <option>Reservado</option>
+            <option>Malo</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="firma-block">
+      <div class="firma-line"></div>
+      <div class="firma-label">Firma del Médico</div>
+    </div>
+    <div class="sello-block">
+      <div class="sello-circle"></div>
+      <div class="sello-label">Sello</div>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-tel">55 3410 8562</div>
+      <div class="footer-web">ortopediadelmoral.com.mx</div>
+      <div class="footer-note">Nota de Evolución · Ciudad de México</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTÓN -->
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+<p class="print-note">Imprime en <strong>tamaño carta</strong>.<br>Activa "Gráficos de fondo" para que salga la barra azul.</p>
+
+<script>
+function selectEva(btn, val) {
+  document.querySelectorAll('#eva .eva-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.style.background = '';
+    b.style.borderColor = '';
+  });
+  const colors = {
+    1:'#4caf50',2:'#8bc34a',3:'#cddc39',4:'#ffeb3b',5:'#ffc107',
+    6:'#ff9800',7:'#ff7043',8:'#f44336',9:'#e53935',10:'#b71c1c'
+  };
+  btn.classList.add('selected');
+  btn.style.background = colors[val];
+  btn.style.borderColor = colors[val];
+}
+
+function selMejora(btn, tipo) {
+  document.querySelectorAll('#mejora .mejora-btn').forEach(b => {
+    b.classList.remove('sel-mej','sel-igual','sel-peor');
+  });
+  btn.classList.add('sel-' + tipo);
+}
+
+function selAdh(btn, tipo) {
+  const grupo = btn.closest('.adh-opts');
+  grupo.querySelectorAll('.adh-opt').forEach(b => b.classList.remove('adh-si','adh-no','adh-par'));
+  btn.classList.add('adh-' + tipo);
+}
+</script>
+
+</body>
+</html>
